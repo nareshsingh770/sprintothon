@@ -62,7 +62,7 @@ export default function Home() {
           </ScrollAnimation>
           {/* Overlapping Profile Images */}
           <ScrollAnimation>
-            <div className="mt-8 flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full px-6 py-3 w-[400px] mt-24">
+            <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full px-6 py-3 w-[400px] mt-24">
               <div className="flex -space-x-3">
                 <img
                   src="/images/profiles/profile-1.png"
