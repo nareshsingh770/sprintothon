@@ -3,10 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  output: 'export',
-  images: {
-    domains: ['images.unsplash.com'],
-  },
+  basePath: "/static-sprintothon",
+  output: "export",
 };
 
 export default nextConfig;

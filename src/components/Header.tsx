@@ -15,8 +15,12 @@ export default function Header() {
   return (
     <header className="fixed top-0 z-50 w-full bg-background backdrop-blur-sm shadow-sm">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" className="text-2xl font-bold" onClick={closeMenu}>
-          <img className={"h-12"} src={"/images/logo.png"} alt="logo" />
+        <Link
+          href="/"
+          className="text-2xl font-bold text-white"
+          onClick={closeMenu}
+        >
+          Sprintothon
         </Link>
 
         {/* Desktop Navigation */}
@@ -29,18 +33,25 @@ export default function Header() {
             Home
           </Link>
           <Link
-            href="/portfolio"
+            href="#aboutus"
             style={{ color: "#fff" }}
             className="hover:text-primary transition-colors"
           >
-            Portfolio
+            About Us
           </Link>
           <Link
-            href="/blogs"
+            href="#events"
             style={{ color: "#fff" }}
             className="hover:text-primary transition-colors"
           >
-            Blogs
+            Events
+          </Link>
+          <Link
+            href="/contact-us"
+            style={{ color: "#fff" }}
+            className="hover:text-primary transition-colors"
+          >
+            Contact Us
           </Link>
           <ThemeToggle />
         </nav>

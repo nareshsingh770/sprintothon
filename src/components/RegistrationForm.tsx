@@ -1,0 +1,487 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { registrationFormSchema, type RegistrationFormData } from "../types";
+import { Send } from "lucide-react";
+import { z } from "zod";
+import { regsiterParticipant } from "@/services/apiServices";
+
+export default function RegistrationForm() {
+  const [formData, setFormData] = useState<RegistrationFormData>({
+    firstname: "naresh",
+    lastname: "singh",
+    gender: "male" as "male" | "female" | "other",
+    tShirtSize: "S" as "XS" | "S" | "M" | "L" | "XL" | "XXL",
+    marathonCategory: "5K" as "5K" | "10K" | "21K" | "42K",
+    mobile: "9318498567",
+    email: "nsingh770@gmail.com",
+    age: "32",
+    country: "india",
+    address: "shakarpur delhi",
+    pincode: "110092",
+    message: "hello world",
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [showPaymentButton, setShowPaymentButton] = useState(false);
+  const [savedFormData, setSavedFormData] =
+    useState<RegistrationFormData | null>(null);
+
+  // Load Razorpay checkout script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handlePayment = () => {
+    if (!savedFormData) return;
+
+    const options = {
+      key: "rzp_test_Rh7WyPFZvapNWD",
+      amount: 50000, // Amount in paise (500 rupees)
+      currency: "INR",
+      name: "Marathon Registration",
+      description: `${savedFormData.marathonCategory} Marathon Registration`,
+      image: "/logo.png", // Your logo
+      prefill: {
+        name: `${savedFormData.firstname} ${savedFormData.lastname}`,
+        email: savedFormData.email,
+        contact: savedFormData.mobile,
+      },
+      theme: {
+        color: "#db2777", // Pink color
+      },
+      handler: function (response: any) {
+        console.log("Payment successful:", response);
+        alert(
+          "Payment successful! Payment ID: " + response.razorpay_payment_id
+        );
+        setShowPaymentButton(false);
+      },
+      modal: {
+        ondismiss: function () {
+          console.log("Payment cancelled");
+        },
+      },
+    };
+
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.open();
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitStatus("idle");
+    setErrors({});
+
+    // Validate with Zod
+    try {
+      registrationFormSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors: Record<string, string> = {};
+        error.issues.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0].toString()] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        return;
+      }
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const status = await regsiterParticipant(formData);
+      console.log(status, "response_response");
+      setSubmitStatus("success");
+
+      // Save form data before clearing for payment button prefill
+      setSavedFormData(formData);
+
+      // Show payment button after successful registration
+      setShowPaymentButton(true);
+
+      setFormData({
+        firstname: "",
+        lastname: "",
+        gender: "" as "male" | "female" | "other",
+        tShirtSize: "" as "XS" | "S" | "M" | "L" | "XL" | "XXL",
+        marathonCategory: "" as "5K" | "10K" | "21K" | "42K",
+        mobile: "",
+        email: "",
+        age: "",
+        country: "india",
+        address: "",
+        pincode: "",
+        message: "",
+      });
+      setErrors({});
+    } catch (error) {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-5xl mx-auto space-y-6 px-3 mb-4"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="firstname" className="block text-sm font-medium mb-2">
+            First Name
+          </label>
+          <input
+            id="firstname"
+            type="text"
+            placeholder="John"
+            value={formData.firstname}
+            onChange={(e) => {
+              setFormData({ ...formData, firstname: e.target.value });
+              if (errors.firstname) setErrors({ ...errors, firstname: "" });
+            }}
+            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+              errors.firstname ? "border-red-500" : ""
+            }`}
+          />
+          {errors.firstname && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.firstname}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="lastname" className="block text-sm font-medium mb-2">
+            Last Name
+          </label>
+          <input
+            id="lastname"
+            type="text"
+            placeholder="Doe"
+            value={formData.lastname}
+            onChange={(e) => {
+              setFormData({ ...formData, lastname: e.target.value });
+              if (errors.lastname) setErrors({ ...errors, lastname: "" });
+            }}
+            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+              errors.lastname ? "border-red-500" : ""
+            }`}
+          />
+          {errors.lastname && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.lastname}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="gender" className="block text-sm font-medium mb-2">
+            Gender
+          </label>
+          <select
+            id="gender"
+            value={formData.gender}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                gender: e.target.value as "male" | "female" | "other",
+              });
+              if (errors.gender) setErrors({ ...errors, gender: "" });
+            }}
+            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+              errors.gender ? "border-red-500" : ""
+            }`}
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          {errors.gender && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.gender}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="age" className="block text-sm font-medium mb-2">
+            Age
+          </label>
+          <input
+            id="age"
+            type="number"
+            placeholder="25"
+            value={formData.age}
+            onChange={(e) => {
+              setFormData({ ...formData, age: e.target.value });
+              if (errors.age) setErrors({ ...errors, age: "" });
+            }}
+            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+              errors.age ? "border-red-500" : ""
+            }`}
+          />
+          {errors.age && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.age}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label
+            htmlFor="tShirtSize"
+            className="block text-sm font-medium mb-2"
+          >
+            T-Shirt Size
+          </label>
+          <select
+            id="tShirtSize"
+            value={formData.tShirtSize}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                tShirtSize: e.target.value as
+                  | "XS"
+                  | "S"
+                  | "M"
+                  | "L"
+                  | "XL"
+                  | "XXL",
+              });
+              if (errors.tShirtSize) setErrors({ ...errors, tShirtSize: "" });
+            }}
+            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+              errors.tShirtSize ? "border-red-500" : ""
+            }`}
+          >
+            <option value="">Select Size</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+          {errors.tShirtSize && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.tShirtSize}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="marathonCategory"
+            className="block text-sm font-medium mb-2"
+          >
+            Marathon Category
+          </label>
+          <select
+            id="marathonCategory"
+            value={formData.marathonCategory}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                marathonCategory: e.target.value as
+                  | "5K"
+                  | "10K"
+                  | "21K"
+                  | "42K",
+              });
+              if (errors.marathonCategory)
+                setErrors({ ...errors, marathonCategory: "" });
+            }}
+            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+              errors.marathonCategory ? "border-red-500" : ""
+            }`}
+          >
+            <option value="">Select Category</option>
+            <option value="5K">5K</option>
+            <option value="10K">10K</option>
+            <option value="21K">Half Marathon (21K)</option>
+            <option value="42K">Full Marathon (42K)</option>
+          </select>
+          {errors.marathonCategory && (
+            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+              {errors.marathonCategory}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium mb-2">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          placeholder="john@example.com"
+          value={formData.email}
+          onChange={(e) => {
+            setFormData({ ...formData, email: e.target.value });
+            if (errors.email) setErrors({ ...errors, email: "" });
+          }}
+          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            errors.email ? "border-red-500" : ""
+          }`}
+        />
+        {errors.email && (
+          <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+            {errors.email}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="mobile" className="block text-sm font-medium mb-2">
+          Mobile
+        </label>
+        <input
+          id="mobile"
+          type="tel"
+          placeholder="+91 9876543210"
+          value={formData.mobile}
+          onChange={(e) => {
+            setFormData({ ...formData, mobile: e.target.value });
+            if (errors.mobile) setErrors({ ...errors, mobile: "" });
+          }}
+          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            errors.mobile ? "border-red-500" : ""
+          }`}
+        />
+        {errors.mobile && (
+          <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+            {errors.mobile}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="address" className="block text-sm font-medium mb-2">
+          Address
+        </label>
+        <textarea
+          id="address"
+          placeholder="Enter your full address"
+          value={formData.address}
+          onChange={(e) => {
+            setFormData({ ...formData, address: e.target.value });
+            if (errors.address) setErrors({ ...errors, address: "" });
+          }}
+          rows={3}
+          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition resize-none ${
+            errors.address ? "border-red-500" : ""
+          }`}
+        />
+        {errors.address && (
+          <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+            {errors.address}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="pincode" className="block text-sm font-medium mb-2">
+          Pincode
+        </label>
+        <input
+          id="pincode"
+          type="text"
+          placeholder="400001"
+          maxLength={6}
+          value={formData.pincode}
+          onChange={(e) => {
+            setFormData({ ...formData, pincode: e.target.value });
+            if (errors.pincode) setErrors({ ...errors, pincode: "" });
+          }}
+          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            errors.pincode ? "border-red-500" : ""
+          }`}
+        />
+        {errors.pincode && (
+          <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+            {errors.pincode}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium mb-2">
+          Additional Notes (Optional)
+        </label>
+        <textarea
+          id="message"
+          placeholder="Any additional information..."
+          value={formData.message}
+          onChange={(e) => {
+            setFormData({ ...formData, message: e.target.value });
+            if (errors.message) setErrors({ ...errors, message: "" });
+          }}
+          rows={4}
+          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition resize-none ${
+            errors.message ? "border-red-500" : ""
+          }`}
+        />
+        {errors.message && (
+          <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+            {errors.message}
+          </p>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-pink-600 text-white border-2 cursor-pointer border-pink-600 rounded-lg font-semibold hover:bg-pink-700 transition-all hover:scale-105 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+      >
+        {isSubmitting ? "Submitting..." : "Register Now"}
+        <Send className="h-4 w-4" />
+      </button>
+
+      {submitStatus === "success" && (
+        <div className="space-y-4">
+          <p className="text-green-600 dark:text-green-400 text-center font-medium">
+            Registration submitted successfully! Please complete the payment
+            below.
+          </p>
+
+          {/* Razorpay Payment Button */}
+          <div className="flex justify-center">
+            <button
+              onClick={handlePayment}
+              type="button"
+              className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all hover:scale-105 shadow-lg"
+            >
+              Pay Now with Razorpay
+            </button>
+          </div>
+        </div>
+      )}
+      {submitStatus === "error" && (
+        <p className="text-red-600 dark:text-red-400 text-center font-medium">
+          Failed to submit registration. Please try again.
+        </p>
+      )}
+    </form>
+  );
+}
