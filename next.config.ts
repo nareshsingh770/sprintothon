@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   output: "export",
+  basePath: '/sprintothon',
+  assetPrefix: '/sprintothon/',
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

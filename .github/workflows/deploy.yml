@@ -18,6 +18,7 @@ jobs:
       - name: Build and Export (SSG)
         run: |
           npm run build
+          touch ./out/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -25,5 +26,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           force_orphan: true
-          # Optional: Add .nojekyll
-          # enable_jekyll: false
