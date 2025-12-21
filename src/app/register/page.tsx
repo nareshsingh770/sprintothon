@@ -20,7 +20,7 @@ function RegistrationContent() {
         })
       : null;
     if (!selected) {
-      window.location.href = "/static-sprintothon#events";
+      window.location.href = "#events";
     }
     setSelectedEvent(selected);
   }, [selectedEvent, searchParams]);

@@ -315,7 +315,7 @@ export default function RegistrationForm({
                 (cat) => cat.title === e.target.value
               );
               if (selected?.title) {
-                window.location.href = `/static-sprintothon/register?event=${encodeURIComponent(
+                window.location.href = `/register?event=${encodeURIComponent(
                   selected.title
                 )}`;
               }

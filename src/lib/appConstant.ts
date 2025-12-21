@@ -16,17 +16,17 @@ export const trainers = [
   {
     name: "Ethan Cole",
     role: "Running Coach",
-    image: "/static-sprintothon/images/profiles/profile-1.png",
+    image: "/images/profiles/profile-1.png",
   },
   {
     name: "Ava Mitchell",
     role: "Endurance Coach",
-    image: "/static-sprintothon/images/profiles/profile-2.png",
+    image: "/images/profiles/profile-2.png",
   },
   {
     name: "Liam Turner",
     role: "Strength Trainer",
-    image: "/static-sprintothon/images/profiles/profile-3.png",
+    image: "/images/profiles/profile-3.png",
   },
 ];
 
@@ -60,7 +60,7 @@ export const eventCategory = [
     date: "Mar 22, 2026",
     price: 699,
     regularPrice: 1599,
-    image: "/static-sprintothon/images/marathon.png",
+    image: "/images/marathon.png",
     alt: "Sydney Marathon",
   },
   {
@@ -72,7 +72,7 @@ export const eventCategory = [
     date: "Sep 27, 2026",
     price: 699,
     regularPrice: 1599,
-    image: "/static-sprintothon/images/marathon.png",
+    image: "/images/marathon.png",
     alt: "Berlin Marathon",
   },
   {
@@ -84,7 +84,7 @@ export const eventCategory = [
     date: "Jul 18, 2026",
     price: 1699,
     regularPrice: 1599,
-    image: "/static-sprintothon/images/marathon.png",
+    image: "/images/marathon.png",
     alt: "New York Marathon",
   },
   {
@@ -96,7 +96,7 @@ export const eventCategory = [
     date: "Jul 18, 2026",
     price: 999,
     regularPrice: 1599,
-    image: "/static-sprintothon/images/marathon.png",
+    image: "/images/marathon.png",
     alt: "New York Marathon",
   },
   {
@@ -108,7 +108,7 @@ export const eventCategory = [
     date: "Jul 18, 2026",
     price: 799,
     regularPrice: 1599,
-    image: "/static-sprintothon/images/marathon.png",
+    image: "/images/marathon.png",
     alt: "New York Marathon",
   },
   {
@@ -120,7 +120,7 @@ export const eventCategory = [
     date: "Jul 18, 2026",
     price: 399,
     regularPrice: 1599,
-    image: "/static-sprintothon/images/marathon.png",
+    image: "/images/marathon.png",
     alt: "New York Marathon",
   },
 ];

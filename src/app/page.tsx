@@ -11,7 +11,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/static-sprintothon/images/herobanner.jpg"
+            src="/images/herobanner.jpg"
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
@@ -33,7 +33,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-center">
                 <a
-                  href="/static-sprintothon/register"
+                  href="/register"
                   className="px-8 py-4 bg-orange-600 text-white rounded-lg font-semibold hover:opacity-90 transition-all hover:scale-105 inline-flex items-center gap-2"
                 >
                   Get Register
@@ -65,22 +65,22 @@ export default function Home() {
             <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full px-6 py-3 w-[400px] mt-24">
               <div className="flex -space-x-3">
                 <img
-                  src="/static-sprintothon/images/profiles/profile-1.png"
+                  src="/images/profiles/profile-1.png"
                   alt="Runner 1"
                   className="w-12 h-12 rounded-full border-2 border-white object-cover"
                 />
                 <img
-                  src="/static-sprintothon/images/profiles/profile-2.png"
+                  src="/images/profiles/profile-2.png"
                   alt="Runner 2"
                   className="w-12 h-12 rounded-full border-2 border-white object-cover"
                 />
                 <img
-                  src="/static-sprintothon/images/profiles/profile-3.png"
+                  src="/images/profiles/profile-3.png"
                   alt="Runner 3"
                   className="w-12 h-12 rounded-full border-2 border-white object-cover"
                 />
                 <img
-                  src="/static-sprintothon/images/profiles/profile-4.png"
+                  src="/images/profiles/profile-4.png"
                   alt="Runner 4"
                   className="w-12 h-12 rounded-full border-2 border-white object-cover"
                 />
@@ -134,7 +134,7 @@ export default function Home() {
             >
               <div>
                 <img
-                  src="/static-sprintothon/images/banner1.jpg"
+                  src="/images/banner1.jpg"
                   alt="Team running together"
                   className="w-full h-auto rounded-xl shadow-lg object-cover"
                 />
@@ -320,7 +320,7 @@ export default function Home() {
                   {/* Video/Image Container */}
                   <div className="relative rounded-lg overflow-hidden mb-4 flex-grow">
                     <img
-                      src="/static-sprintothon/images/banner1.jpg"
+                      src="/images/banner1.jpg"
                       alt="Running team"
                       className="w-full h-full object-cover"
                     />
@@ -342,22 +342,22 @@ export default function Home() {
                   <div className="mt-6 bg-[rgb(var(--background))] p-4 rounded-lg flex items-center gap-4 shadow-sm border border-gray-100">
                     <div className="flex -space-x-3">
                       <img
-                        src="/static-sprintothon/images/profiles/profile-1.png"
+                        src="/images/profiles/profile-1.png"
                         alt="Runner 1"
                         className="w-10 h-10 rounded-full border-2 border-white object-cover"
                       />
                       <img
-                        src="/static-sprintothon/images/profiles/profile-2.png"
+                        src="/images/profiles/profile-2.png"
                         alt="Runner 2"
                         className="w-10 h-10 rounded-full border-2 border-white object-cover"
                       />
                       <img
-                        src="/static-sprintothon/images/profiles/profile-3.png"
+                        src="/images/profiles/profile-3.png"
                         alt="Runner 3"
                         className="w-10 h-10 rounded-full border-2 border-white object-cover"
                       />
                       <img
-                        src="/static-sprintothon/images/profiles/profile-4.png"
+                        src="/images/profiles/profile-4.png"
                         alt="Runner 4"
                         className="w-10 h-10 rounded-full border-2 border-white object-cover"
                       />
@@ -408,7 +408,7 @@ export default function Home() {
               distance={32}
             >
               <img
-                src="/static-sprintothon/images/portfolio/club-1.jpg"
+                src="/images/portfolio/club-1.jpg"
                 alt="Urban Pace Club"
                 className="w-full h-80 object-cover"
               />
@@ -433,7 +433,7 @@ export default function Home() {
               distance={32}
             >
               <img
-                src="/static-sprintothon/images/portfolio/club-2.jpg"
+                src="/images/portfolio/club-2.jpg"
                 alt="Marathon Club"
                 className="w-full h-80 object-cover"
               />
@@ -458,7 +458,7 @@ export default function Home() {
               distance={32}
             >
               <img
-                src="/static-sprintothon/images/portfolio/club-3.jpg"
+                src="/images/portfolio/club-3.jpg"
                 alt="Event Prep"
                 className="w-full h-80 object-cover"
               />
@@ -483,7 +483,7 @@ export default function Home() {
               distance={32}
             >
               <img
-                src="/static-sprintothon/images/portfolio/club-4.jpg"
+                src="/images/portfolio/club-4.jpg"
                 alt="Stamina Boost"
                 className="w-full h-80 object-cover"
               />
@@ -615,9 +615,7 @@ export default function Home() {
                   </div>
 
                   <a
-                    href={`/static-sprintothon/register?event=${encodeURIComponent(
-                      event.title
-                    )}`}
+                    href={`/register?event=${encodeURIComponent(event.title)}`}
                     className="mt-4 px-6 py-3 bg-red-600 text-white rounded font-semibold hover:bg-red-700 transition hover:scale-105"
                   >
                     Buy Ticket
