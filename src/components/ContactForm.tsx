@@ -76,7 +76,7 @@ export default function ContactForm() {
             setFormData({ ...formData, fullname: e.target.value });
             if (errors.fullname) setErrors({ ...errors, fullname: "" });
           }}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
             errors.fullname ? "border-red-500" : ""
           }`}
         />
@@ -100,7 +100,7 @@ export default function ContactForm() {
             setFormData({ ...formData, email: e.target.value });
             if (errors.email) setErrors({ ...errors, email: "" });
           }}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
             errors.email ? "border-red-500" : ""
           }`}
         />
@@ -124,7 +124,7 @@ export default function ContactForm() {
             setFormData({ ...formData, mobile: e.target.value });
             if (errors.mobile) setErrors({ ...errors, mobile: "" });
           }}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
             errors.mobile ? "border-red-500" : ""
           }`}
         />
@@ -148,7 +148,7 @@ export default function ContactForm() {
             if (errors.message) setErrors({ ...errors, message: "" });
           }}
           rows={5}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition resize-none ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition resize-none ${
             errors.message ? "border-red-500" : ""
           }`}
         />

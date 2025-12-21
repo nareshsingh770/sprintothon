@@ -12,7 +12,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-muted border-t bg-stone-800">
+    <footer className="bg-muted bg-stone-800">
       <div className="container mx-auto px-4 py-12 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Tagline */}
@@ -30,7 +30,7 @@ export default function Footer() {
                 href="https://www.facebook.com/people/Next-Generation-Software/61582076636712/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-background hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="p-2 rounded-lg bg-[rgb(var(--background))] hover:bg-primary hover:text-primary-foreground transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5 text-orange-600" />
@@ -40,7 +40,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-background hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="p-2 rounded-lg bg-[rgb(var(--background))] hover:bg-primary hover:text-primary-foreground transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5 text-orange-600" />

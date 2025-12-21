@@ -34,9 +34,7 @@ export const registrationFormSchema = z.object({
   tShirtSize: z.enum(["XS", "S", "M", "L", "XL", "XXL"], {
     message: "Please select a t-shirt size",
   }),
-  marathonCategory: z.enum(["5K", "10K", "21K", "42K"], {
-    message: "Please select a marathon category",
-  }),
+  marathonCategory: z.string().min(1, "Please select a marathon category"),
   mobile: z
     .string()
     .regex(

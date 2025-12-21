@@ -13,11 +13,11 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-background backdrop-blur-sm shadow-sm">
+    <header className="fixed top-0 z-50 w-full bg-[rgb(var(--background))] border-b border-gray-200 shadow-sm">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link
           href="/"
-          className="text-2xl font-bold text-white"
+          className="text-2xl font-bold text-orange-600"
           onClick={closeMenu}
         >
           Sprintothon
@@ -25,32 +25,16 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link
-            href="/"
-            style={{ color: "#fff" }}
-            className="hover:text-primary transition-colors"
-          >
+          <Link href="/" className="text-orange-600 font-medium">
             Home
           </Link>
-          <Link
-            href="#aboutus"
-            style={{ color: "#fff" }}
-            className="hover:text-primary transition-colors"
-          >
+          <Link href="#aboutus" className="text-orange-600 font-medium">
             About Us
           </Link>
-          <Link
-            href="#events"
-            style={{ color: "#fff" }}
-            className="hover:text-primary transition-colors"
-          >
+          <Link href="#events" className="text-orange-600 font-medium">
             Events
           </Link>
-          <Link
-            href="/contact-us"
-            style={{ color: "#fff" }}
-            className="hover:text-primary transition-colors"
-          >
+          <Link href="/contact-us" className="text-orange-600 font-medium">
             Contact Us
           </Link>
           <ThemeToggle />
@@ -65,9 +49,9 @@ export default function Header() {
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-white" />
+              <X className="h-6 w-6 text-orange-400" />
             ) : (
-              <Menu className="h-6 w-6 text-white" />
+              <Menu className="h-6 w-6 text-orange-400" />
             )}
           </button>
         </div>
@@ -75,25 +59,25 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <nav className="md:hidden border-t bg-background">
+        <nav className="md:hidden border-t bg-[rgb(var(--background))]">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
             <Link
               href="/"
-              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-white"
+              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
               onClick={closeMenu}
             >
               Home
             </Link>
             <Link
               href="/portfolio"
-              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-white"
+              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
               onClick={closeMenu}
             >
               Portfolio
             </Link>
             <Link
               href="/blogs"
-              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-white"
+              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
               onClick={closeMenu}
             >
               Blogs

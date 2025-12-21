@@ -5,14 +5,21 @@ import { registrationFormSchema, type RegistrationFormData } from "../types";
 import { Send } from "lucide-react";
 import { z } from "zod";
 import { regsiterParticipant } from "@/services/apiServices";
+import { eventCategory } from "@/lib/appConstant";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({
+  selectedEvent,
+  eventonChange,
+}: {
+  selectedEvent: any;
+  eventonChange: (event: any) => void;
+}) {
   const [formData, setFormData] = useState<RegistrationFormData>({
     firstname: "naresh",
     lastname: "singh",
     gender: "male" as "male" | "female" | "other",
     tShirtSize: "S" as "XS" | "S" | "M" | "L" | "XL" | "XXL",
-    marathonCategory: "5K" as "5K" | "10K" | "21K" | "42K",
+    marathonCategory: "",
     mobile: "9318498567",
     email: "nsingh770@gmail.com",
     age: "32",
@@ -42,21 +49,26 @@ export default function RegistrationForm() {
     };
   }, []);
 
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      marathonCategory: selectedEvent
+        ? selectedEvent.title
+        : prev.marathonCategory,
+    }));
+  }, [selectedEvent]);
+
   const handlePayment = () => {
-    if (!savedFormData) return;
+    debugger;
+    if (!selectedEvent) return;
 
     const options = {
       key: "rzp_test_Rh7WyPFZvapNWD",
-      amount: 50000, // Amount in paise (500 rupees)
+      amount: selectedEvent ? selectedEvent.price * 100 : 0, // Amount in paise (500 rupees)
       currency: "INR",
       name: "Marathon Registration",
-      description: `${savedFormData.marathonCategory} Marathon Registration`,
+      description: `${selectedEvent.title} Marathon Registration`,
       image: "/logo.png", // Your logo
-      prefill: {
-        name: `${savedFormData.firstname} ${savedFormData.lastname}`,
-        email: savedFormData.email,
-        contact: savedFormData.mobile,
-      },
       theme: {
         color: "#db2777", // Pink color
       },
@@ -117,7 +129,7 @@ export default function RegistrationForm() {
         lastname: "",
         gender: "" as "male" | "female" | "other",
         tShirtSize: "" as "XS" | "S" | "M" | "L" | "XL" | "XXL",
-        marathonCategory: "" as "5K" | "10K" | "21K" | "42K",
+        marathonCategory: "",
         mobile: "",
         email: "",
         age: "",
@@ -131,15 +143,14 @@ export default function RegistrationForm() {
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
+      console.log("initiating payment");
+      handlePayment();
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-5xl mx-auto space-y-6 px-3 mb-4"
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
         <div>
           <label htmlFor="firstname" className="block text-sm font-medium mb-2">
             First Name
@@ -153,7 +164,7 @@ export default function RegistrationForm() {
               setFormData({ ...formData, firstname: e.target.value });
               if (errors.firstname) setErrors({ ...errors, firstname: "" });
             }}
-            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
               errors.firstname ? "border-red-500" : ""
             }`}
           />
@@ -177,7 +188,7 @@ export default function RegistrationForm() {
               setFormData({ ...formData, lastname: e.target.value });
               if (errors.lastname) setErrors({ ...errors, lastname: "" });
             }}
-            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
               errors.lastname ? "border-red-500" : ""
             }`}
           />
@@ -189,7 +200,7 @@ export default function RegistrationForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
         <div>
           <label htmlFor="gender" className="block text-sm font-medium mb-2">
             Gender
@@ -204,7 +215,7 @@ export default function RegistrationForm() {
               });
               if (errors.gender) setErrors({ ...errors, gender: "" });
             }}
-            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
               errors.gender ? "border-red-500" : ""
             }`}
           >
@@ -233,7 +244,7 @@ export default function RegistrationForm() {
               setFormData({ ...formData, age: e.target.value });
               if (errors.age) setErrors({ ...errors, age: "" });
             }}
-            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
               errors.age ? "border-red-500" : ""
             }`}
           />
@@ -245,7 +256,7 @@ export default function RegistrationForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
         <div>
           <label
             htmlFor="tShirtSize"
@@ -269,7 +280,7 @@ export default function RegistrationForm() {
               });
               if (errors.tShirtSize) setErrors({ ...errors, tShirtSize: "" });
             }}
-            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
               errors.tShirtSize ? "border-red-500" : ""
             }`}
           >
@@ -299,26 +310,28 @@ export default function RegistrationForm() {
             id="marathonCategory"
             value={formData.marathonCategory}
             onChange={(e) => {
-              setFormData({
-                ...formData,
-                marathonCategory: e.target.value as
-                  | "5K"
-                  | "10K"
-                  | "21K"
-                  | "42K",
-              });
+              debugger;
+              const selected = eventCategory.find(
+                (cat) => cat.title === e.target.value
+              );
+              if (selected?.title) {
+                window.location.href = `/static-sprintothon/register?event=${encodeURIComponent(
+                  selected.title
+                )}`;
+              }
+
               if (errors.marathonCategory)
                 setErrors({ ...errors, marathonCategory: "" });
             }}
-            className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+            className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
               errors.marathonCategory ? "border-red-500" : ""
             }`}
           >
-            <option value="">Select Category</option>
-            <option value="5K">5K</option>
-            <option value="10K">10K</option>
-            <option value="21K">Half Marathon (21K)</option>
-            <option value="42K">Full Marathon (42K)</option>
+            {eventCategory.map((category, index) => (
+              <option key={index} value={category.title}>
+                {category.title}
+              </option>
+            ))}
           </select>
           {errors.marathonCategory && (
             <p className="text-red-600 dark:text-red-400 text-sm mt-1">
@@ -328,7 +341,7 @@ export default function RegistrationForm() {
         </div>
       </div>
 
-      <div>
+      <div className="mb-3">
         <label htmlFor="email" className="block text-sm font-medium mb-2">
           Email
         </label>
@@ -341,7 +354,7 @@ export default function RegistrationForm() {
             setFormData({ ...formData, email: e.target.value });
             if (errors.email) setErrors({ ...errors, email: "" });
           }}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
             errors.email ? "border-red-500" : ""
           }`}
         />
@@ -352,7 +365,7 @@ export default function RegistrationForm() {
         )}
       </div>
 
-      <div>
+      <div className="mb-3">
         <label htmlFor="mobile" className="block text-sm font-medium mb-2">
           Mobile
         </label>
@@ -365,7 +378,7 @@ export default function RegistrationForm() {
             setFormData({ ...formData, mobile: e.target.value });
             if (errors.mobile) setErrors({ ...errors, mobile: "" });
           }}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
             errors.mobile ? "border-red-500" : ""
           }`}
         />
@@ -376,7 +389,7 @@ export default function RegistrationForm() {
         )}
       </div>
 
-      <div>
+      <div className="mb-3">
         <label htmlFor="address" className="block text-sm font-medium mb-2">
           Address
         </label>
@@ -389,7 +402,7 @@ export default function RegistrationForm() {
             if (errors.address) setErrors({ ...errors, address: "" });
           }}
           rows={3}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition resize-none ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition resize-none ${
             errors.address ? "border-red-500" : ""
           }`}
         />
@@ -400,7 +413,7 @@ export default function RegistrationForm() {
         )}
       </div>
 
-      <div>
+      <div className="mb-3">
         <label htmlFor="pincode" className="block text-sm font-medium mb-2">
           Pincode
         </label>
@@ -414,7 +427,7 @@ export default function RegistrationForm() {
             setFormData({ ...formData, pincode: e.target.value });
             if (errors.pincode) setErrors({ ...errors, pincode: "" });
           }}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
             errors.pincode ? "border-red-500" : ""
           }`}
         />
@@ -425,7 +438,7 @@ export default function RegistrationForm() {
         )}
       </div>
 
-      <div>
+      <div className="mb-3">
         <label htmlFor="message" className="block text-sm font-medium mb-2">
           Additional Notes (Optional)
         </label>
@@ -438,7 +451,7 @@ export default function RegistrationForm() {
             if (errors.message) setErrors({ ...errors, message: "" });
           }}
           rows={4}
-          className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary outline-none transition resize-none ${
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition resize-none ${
             errors.message ? "border-red-500" : ""
           }`}
         />
@@ -454,7 +467,11 @@ export default function RegistrationForm() {
         disabled={isSubmitting}
         className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-pink-600 text-white border-2 cursor-pointer border-pink-600 rounded-lg font-semibold hover:bg-pink-700 transition-all hover:scale-105 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
-        {isSubmitting ? "Submitting..." : "Register Now"}
+        {isSubmitting
+          ? "Submitting..."
+          : `Register and Pay ₹${
+              selectedEvent ? selectedEvent.price : ""
+            } with Razorpay`}
         <Send className="h-4 w-4" />
       </button>
 
@@ -464,9 +481,11 @@ export default function RegistrationForm() {
             Registration submitted successfully! Please complete the payment
             below.
           </p>
+        </div>
+      )}
 
-          {/* Razorpay Payment Button */}
-          <div className="flex justify-center">
+      {/* Razorpay Payment Button */}
+      {/* <div className="flex justify-center">
             <button
               onClick={handlePayment}
               type="button"
@@ -474,9 +493,7 @@ export default function RegistrationForm() {
             >
               Pay Now with Razorpay
             </button>
-          </div>
-        </div>
-      )}
+          </div> */}
       {submitStatus === "error" && (
         <p className="text-red-600 dark:text-red-400 text-center font-medium">
           Failed to submit registration. Please try again.

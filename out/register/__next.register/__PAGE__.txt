@@ -2,5 +2,5 @@
 2:I[23779,["/static-sprintothon/_next/static/chunks/20a6efc9b6effb05.js","/static-sprintothon/_next/static/chunks/4e5d716f9242389e.js"],"default"]
 3:I[97367,["/static-sprintothon/_next/static/chunks/ff1a16fafef87110.js","/static-sprintothon/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"buildId":"gql2xy1FMi_Zb6_mIKkqH","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mt-36","children":[["$","h2",null,{"className":"text-3xl font-bold text-center mb-8","children":"Marathon Registration Form"}],["$","$L2",null,{}]]}],[["$","script","script-0",{"src":"/static-sprintothon/_next/static/chunks/4e5d716f9242389e.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"TWPHDEqyMDvVRBRzNrLlI","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mt-36","children":[["$","h2",null,{"className":"text-3xl font-bold text-center mb-8","children":"Marathon Registration Form"}],["$","$L2",null,{}]]}],[["$","script","script-0",{"src":"/static-sprintothon/_next/static/chunks/4e5d716f9242389e.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
 5:null

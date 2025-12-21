@@ -12,36 +12,21 @@ import {
   Target,
 } from "lucide-react";
 
-export const TeamData = [
+export const trainers = [
   {
-    name: "Sarat Chandra Singh",
-    role: "Founder, Marketing",
-    avatar: "/images/profile-1.png",
-    bio: "Specializes in React, Next.js, and Node.js with 8+ years experience.",
+    name: "Ethan Cole",
+    role: "Running Coach",
+    image: "/static-sprintothon/images/profiles/profile-1.png",
   },
   {
-    name: "Kartik Shakar",
-    role: "Founder, UI/UX Designer",
-    avatar: "/images/profile-2.png",
-    bio: "Creates stunning user experiences with modern design principles.",
+    name: "Ava Mitchell",
+    role: "Endurance Coach",
+    image: "/static-sprintothon/images/profiles/profile-2.png",
   },
   {
-    name: "Naresh",
-    role: "Founder, Chief Technology Officer, Software Engineering",
-    avatar: "/images/profile-3.png",
-    bio: "Expert in cloud infrastructure, CI/CD, and automation.",
-  },
-  {
-    name: "Kamal Batra",
-    role: "Cloud Architect, Networking Engineering",
-    avatar: "/images/profile-4.png",
-    bio: "Builds intelligent systems and AI-powered automation workflows.",
-  },
-  {
-    name: "Krishna Nagpal",
-    role: "Mobile Development, Software Engineering",
-    avatar: "/images/profile-5.png",
-    bio: "Builds intelligent systems and AI-powered automation workflows.",
+    name: "Liam Turner",
+    role: "Strength Trainer",
+    image: "/static-sprintothon/images/profiles/profile-3.png",
   },
 ];
 
@@ -65,74 +50,72 @@ export const facts = [
   { icon: Users, title: "User Focused", desc: "Excellent UX/UI" },
 ];
 
-export const portfolioItems: PortfolioItem[] = [
+export const eventCategory = [
   {
-    id: "1",
-    title: "E-Commerce Platform",
-    screenshot: "/images/portfolio/artizhub.com.png",
-    description: "Modern e-commerce solution with real-time inventory",
-    technologies: ["Next.js", "TypeScript", "Strapi", "Razorpay Payment"],
-    liveUrl: "https://artizhub.com",
+    title: "Kidathon 1 KM",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "Berlin, Germany",
+    time: "08:00 - Finish",
+    date: "Sep 27, 2026",
+    price: 699,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "Berlin Marathon",
   },
   {
-    id: "2",
-    title: "E-Commerce Platform",
-    screenshot: "/images/portfolio/artizhub-dark.com.png",
-    description: "Analytics dashboard for business intelligence",
-    technologies: ["Next.js", "TypeScript", "Strapi", "Razorpay Payment"],
-    liveUrl: "https://artizhub.com",
+    title: "Kidathon 400 Meter",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "Sydney, Australia",
+    time: "06:00 - Finish",
+    date: "Mar 22, 2026",
+    price: 1599,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "Sydney Marathon",
   },
   {
-    id: "3",
-    title: "E-Commerce Platform",
-    screenshot: "/images/portfolio/aishaallureboutique.com.png",
-    description: "Basic E-commerce solution with real-time inventory",
-    technologies: ["Wordpress", "woo-commerce"],
-    liveUrl: "https://aishaallureboutique.com",
+    title: "Walkathon 5 KM",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "New York, USA",
+    time: "07:00 - Finish",
+    date: "Jul 18, 2026",
+    price: 1699,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "New York Marathon",
   },
   {
-    id: "4",
-    title: "Portfolio Website",
-    screenshot: "/images/portfolio/aishagroupllc.com.png",
-    description: "Company Portfolio Website",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://aishagroupllc.com",
+    title: "Walkathon 10 KM",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "New York, USA",
+    time: "07:00 - Finish",
+    date: "Jul 18, 2026",
+    price: 999,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "New York Marathon",
   },
   {
-    id: "5",
-    title: "UI/UX E-Commerce Platform",
-    screenshot: "/images/portfolio/e-com.png",
-    description: "Modern e-commerce solution with real-time inventory",
-    technologies: ["Figma", "Adobe XD", "Sketch"],
+    title: "Marathon 5 KM",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "New York, USA",
+    time: "07:00 - Finish",
+    date: "Jul 18, 2026",
+    price: 799,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "New York Marathon",
   },
   {
-    id: "6",
-    title: "UI/UX E-Commerce Platformm",
-    screenshot: "/images/portfolio/e-com2.png",
-    description: "Modern e-commerce solution with real-time inventory",
-    technologies: ["Figma", "Adobe XD", "Sketch"],
-  },
-  {
-    id: "7",
-    title: "Fitness Portfolio Website",
-    screenshot: "/images/portfolio/fitness.png",
-    description: "Company Portfolio Website",
-    technologies: ["React", "Material UI", "MySQL"],
-  },
-  {
-    id: "8",
-    title: "Game",
-    screenshot: "/images/portfolio/game.png",
-    description: "Rollete Wheel Game for giveaways",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    id: "9",
-    title: "Portfolio Website",
-    screenshot: "/images/portfolio/kgmiec.in.png",
-    description: "Company Portfolio Website",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://kgmiec.in",
+    title: "Marathon 10 KM",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "New York, USA",
+    time: "07:00 - Finish",
+    date: "Jul 18, 2026",
+    price: 399,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "New York Marathon",
   },
 ];
 
@@ -202,17 +185,17 @@ export const blogs: Blog[] = [
               <h3 class="text-2xl font-semibold text-primary mb-4">Core Web Vitals</h3>
               <p class="text-foreground mb-4">Google evaluates speed using three key metrics:</p>
               <div class="grid md:grid-cols-3 gap-4">
-                <div class="bg-background p-4 rounded-lg">
+                <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                   <h4 class="font-semibold text-primary mb-2">⚡ LCP</h4>
                   <p class="text-sm font-medium mb-1">Largest Contentful Paint</p>
                   <p class="text-xs text-muted-foreground">Measures loading performance</p>
                 </div>
-                <div class="bg-background p-4 rounded-lg">
+                <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                   <h4 class="font-semibold text-primary mb-2">🎯 FID/INP</h4>
                   <p class="text-sm font-medium mb-1">First Input Delay / INP</p>
                   <p class="text-xs text-muted-foreground">Measures interactivity</p>
                 </div>
-                <div class="bg-background p-4 rounded-lg">
+                <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                   <h4 class="font-semibold text-primary mb-2">📊 CLS</h4>
                   <p class="text-sm font-medium mb-1">Cumulative Layout Shift</p>
                   <p class="text-xs text-muted-foreground">Measures visual stability</p>
@@ -317,19 +300,19 @@ export const blogs: Blog[] = [
                   and UX personalization. Expect faster development cycles and smarter apps.
                 </p>
                 <div class="grid sm:grid-cols-2 gap-3">
-                  <div class="bg-background p-3 rounded-lg">
+                  <div class="bg-[rgb(var(--background))] p-3 rounded-lg">
                     <p class="text-sm font-semibold text-primary mb-1">Code Generation</p>
                     <p class="text-xs text-muted-foreground">AI assistants write boilerplate code</p>
                   </div>
-                  <div class="bg-background p-3 rounded-lg">
+                  <div class="bg-[rgb(var(--background))] p-3 rounded-lg">
                     <p class="text-sm font-semibold text-primary mb-1">Smart Testing</p>
                     <p class="text-xs text-muted-foreground">Automated bug detection & fixes</p>
                   </div>
-                  <div class="bg-background p-3 rounded-lg">
+                  <div class="bg-[rgb(var(--background))] p-3 rounded-lg">
                     <p class="text-sm font-semibold text-primary mb-1">Personalization</p>
                     <p class="text-xs text-muted-foreground">Dynamic UX based on user behavior</p>
                   </div>
-                  <div class="bg-background p-3 rounded-lg">
+                  <div class="bg-[rgb(var(--background))] p-3 rounded-lg">
                     <p class="text-sm font-semibold text-primary mb-1">Performance</p>
                     <p class="text-xs text-muted-foreground">AI-powered optimization</p>
                   </div>
@@ -430,7 +413,7 @@ export const blogs: Blog[] = [
                   Breaking the frontend into smaller, independently deployable pieces improves team velocity 
                   and scalability.
                 </p>
-                <div class="bg-background p-5 rounded-lg">
+                <div class="bg-[rgb(var(--background))] p-5 rounded-lg">
                   <h4 class="font-semibold text-foreground mb-3">Why Micro-Frontends?</h4>
                   <div class="space-y-3">
                     <div class="flex items-start gap-3">
@@ -599,19 +582,19 @@ export const blogs: Blog[] = [
           <div class="bg-primary/10 dark:bg-primary/20 p-6 rounded-xl border border-primary/20">
             <h3 class="text-2xl font-semibold text-primary mb-3">Tools to Measure Web Vitals</h3>
             <div class="grid sm:grid-cols-2 gap-4">
-              <div class="bg-background p-4 rounded-lg">
+              <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                 <h4 class="font-semibold mb-2">🔍 Google PageSpeed Insights</h4>
                 <p class="text-sm text-muted-foreground">Comprehensive analysis with suggestions</p>
               </div>
-              <div class="bg-background p-4 rounded-lg">
+              <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                 <h4 class="font-semibold mb-2">🛠️ Chrome DevTools</h4>
                 <p class="text-sm text-muted-foreground">Real-time performance monitoring</p>
               </div>
-              <div class="bg-background p-4 rounded-lg">
+              <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                 <h4 class="font-semibold mb-2">📊 Search Console</h4>
                 <p class="text-sm text-muted-foreground">Track Core Web Vitals over time</p>
               </div>
-              <div class="bg-background p-4 rounded-lg">
+              <div class="bg-[rgb(var(--background))] p-4 rounded-lg">
                 <h4 class="font-semibold mb-2">⚡ Lighthouse</h4>
                 <p class="text-sm text-muted-foreground">Automated auditing tool</p>
               </div>
@@ -665,6 +648,7 @@ export const blogs: Blog[] = [
     `,
     date: "2024-01-05",
     author: "Naresh",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200",
-  }
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200",
+  },
 ];
