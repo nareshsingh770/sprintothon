@@ -52,6 +52,18 @@ export const facts = [
 
 export const eventCategory = [
   {
+    title: "Kidathon 400 Meter",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
+    location: "Sydney, Australia",
+    time: "06:00 - Finish",
+    date: "Mar 22, 2026",
+    price: 699,
+    regularPrice: 1599,
+    image: "/static-sprintothon/images/marathon.png",
+    alt: "Sydney Marathon",
+  },
+  {
     title: "Kidathon 1 KM",
     description:
       "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
@@ -59,19 +71,9 @@ export const eventCategory = [
     time: "08:00 - Finish",
     date: "Sep 27, 2026",
     price: 699,
+    regularPrice: 1599,
     image: "/static-sprintothon/images/marathon.png",
     alt: "Berlin Marathon",
-  },
-  {
-    title: "Kidathon 400 Meter",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipiscing elit sagittis etiam, senectus cursus rhoncus nam.",
-    location: "Sydney, Australia",
-    time: "06:00 - Finish",
-    date: "Mar 22, 2026",
-    price: 1599,
-    image: "/static-sprintothon/images/marathon.png",
-    alt: "Sydney Marathon",
   },
   {
     title: "Walkathon 5 KM",
@@ -81,6 +83,7 @@ export const eventCategory = [
     time: "07:00 - Finish",
     date: "Jul 18, 2026",
     price: 1699,
+    regularPrice: 1599,
     image: "/static-sprintothon/images/marathon.png",
     alt: "New York Marathon",
   },
@@ -92,6 +95,7 @@ export const eventCategory = [
     time: "07:00 - Finish",
     date: "Jul 18, 2026",
     price: 999,
+    regularPrice: 1599,
     image: "/static-sprintothon/images/marathon.png",
     alt: "New York Marathon",
   },
@@ -103,6 +107,7 @@ export const eventCategory = [
     time: "07:00 - Finish",
     date: "Jul 18, 2026",
     price: 799,
+    regularPrice: 1599,
     image: "/static-sprintothon/images/marathon.png",
     alt: "New York Marathon",
   },
@@ -114,6 +119,7 @@ export const eventCategory = [
     time: "07:00 - Finish",
     date: "Jul 18, 2026",
     price: 399,
+    regularPrice: 1599,
     image: "/static-sprintothon/images/marathon.png",
     alt: "New York Marathon",
   },

@@ -2,6 +2,7 @@ import ScrollAnimation from "../components/ScrollAnimation";
 import ContactForm from "../components/ContactForm";
 
 import { eventCategory, facts, services, trainers } from "@/lib/appConstant";
+import { Scroll } from "lucide-react";
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -19,11 +20,11 @@ export default function Home() {
 
         {/* Content */}
         <div className="container mx-auto px-4 py-20 text-center z-10">
-          <ScrollAnimation>
+          <ScrollAnimation direction="down" distance={48}>
             {/* <Logo className="text-5xl md:text-7xl" /> */}
             <div className="mt-6 text-white text-left">
               <h1 className="text-3xl md:text-7xl font-bold mb-6 text-white">
-                Stride With Confidence
+                STRIDE WITH <span className="text-orange-600">PASSION</span>
               </h1>
               <p className="text-sm md:text-2xl text-gray-200 max-w-3xl mb-10">
                 Lorem ipsum dolor sit amet consectetur adipiscing, elit
@@ -60,7 +61,7 @@ export default function Home() {
             </div>
           </ScrollAnimation>
           {/* Overlapping Profile Images */}
-          <ScrollAnimation>
+          <ScrollAnimation direction="up" distance={32}>
             <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full px-6 py-3 w-[400px] mt-24">
               <div className="flex -space-x-3">
                 <img
@@ -87,10 +88,10 @@ export default function Home() {
               {/* Text */}
               <div className="text-white">
                 <p className="font-semibold text-sm leading-tight">
-                  Over 10,000+ Active
+                  Over 20,000+ Active
                 </p>
                 <p className="font-semibold text-sm leading-tight">
-                  Runners Worldwide
+                  Runners in Kolkata
                 </p>
               </div>
             </div>
@@ -118,184 +119,195 @@ export default function Home() {
       {/* About Us Section */}
       <section className="py-20 bg-[rgb(var(--background))]" id="aboutus">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold text-center text-pink-600 mb-6">
-            About Us
-          </h2>
-          <p className="text-center text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Building A Strong Running Squad
-          </p>
-          <ScrollAnimation>
-            <div className="grid md:grid-cols-12 gap-12 items-center mb-16">
-              <div className="md:col-span-5">
+          <div className="text-center mb-12">
+            <p className="text-sm text-red-500 font-semibold uppercase">
+              ABOUT US
+            </p>
+            <h2 className="text-5xl font-extrabold mb-2">WHAT WE STAND FOR</h2>
+          </div>
+
+          <div className="grid md:grid-cols-12 gap-12 items-center mb-16">
+            <ScrollAnimation
+              className="md:col-span-5"
+              direction="right"
+              distance={170}
+            >
+              <div>
                 <img
                   src="/static-sprintothon/images/banner1.jpg"
                   alt="Team running together"
                   className="w-full h-auto rounded-xl shadow-lg object-cover"
                 />
               </div>
-              <div className="md:col-span-7">
+            </ScrollAnimation>
+            <div className="md:col-span-7">
+              <ScrollAnimation direction="left" distance={170}>
                 <div className="mb-6">
-                  <p className="text-muted-foreground mb-6 text-[1.2rem] leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit
-                    aptent vitae ullamcorper inceptos duis nibh, maecenas fames
-                    arcu egestas justo cum sem porttitor habitant dui litora nec
-                    bibendum, odio congue cubilia nisl parturient id eros orci
-                    curabitur facilisi taciti pellentesque.
-                  </p>
-                  <p className="text-muted-foreground text-[1.2rem] leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit
-                    dapibus curae vestibulum, himenaeos volutpat vehicula fames
-                    ultrices nibh placerat non nulla.
+                  <h3 className="text-3xl font-bold mb-4">WHO WE ARE</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    habitasse mus, proin feugiat cum. Lorem ipsum dolor sit
+                    amet, consectetur adipiscing elit habitasse mus, proin
+                    feugiat cum.
                   </p>
                 </div>
-                <ScrollAnimation>
-                  <div className="grid md:grid-cols-2 gap-8">
-                    {/* Vision Card */}
-                    <div className="bg-muted p-8 bg-[rgb(var(--secondary))]">
-                      <h3 className="text-3xl font-bold mb-4">VISION</h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        habitasse mus, proin feugiat cum.
-                      </p>
-                    </div>
-
-                    {/* Mission Card */}
-                    <div className="bg-muted p-8 bg-[rgb(var(--secondary))]">
-                      <h3 className="text-3xl font-bold mb-4">MISSION</h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        habitasse mus, proin feugiat cum.
-                      </p>
-                    </div>
+              </ScrollAnimation>
+              <ScrollAnimation direction="up" distance={32}>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Vision Card */}
+                  <div className="bg-muted p-8 bg-[rgb(var(--secondary))]">
+                    <h3 className="text-3xl font-bold mb-4">VISION</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                      habitasse mus, proin feugiat cum.
+                    </p>
                   </div>
-                </ScrollAnimation>
-              </div>
+
+                  {/* Mission Card */}
+                  <div className="bg-muted p-8 bg-[rgb(var(--secondary))]">
+                    <h3 className="text-3xl font-bold mb-4">MISSION</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                      habitasse mus, proin feugiat cum.
+                    </p>
+                  </div>
+                </div>
+              </ScrollAnimation>
             </div>
-          </ScrollAnimation>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="py-20 bg-[rgb(var(--background))]">
-        <h2 className="text-5xl font-bold text-center text-pink-600 mb-6">
-          Push Further Together
-        </h2>
-        <p className="text-center text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Building A Strong Running Squad
-        </p>
+        <div className="text-center mb-12">
+          <p className="text-sm text-red-500 font-semibold uppercase">
+            BUILD A STRONG RUNNING SQUAD
+          </p>
+          <h2 className="text-5xl font-extrabold mb-2">
+            PUSH FURTHER TOGETHER
+          </h2>
+        </div>
 
         <div className="container mx-auto px-4">
-          <ScrollAnimation>
-            <div className="grid lg:grid-cols-12 gap-8">
-              {/* Left Side - Feature Cards */}
-              <div className="lg:col-span-7 grid md:grid-cols-2 gap-6">
-                {/* Expert Coach */}
-                <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
-                  <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
-                    EXPERT COACH
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit,
-                    convallis varius sociosqu ullamcorper molestie maecenas.
-                  </p>
+          <div className="grid lg:grid-cols-12 gap-8">
+            {/* Left Side - Feature Cards */}
+            <ScrollAnimation
+              className="lg:col-span-7 grid md:grid-cols-2 gap-6"
+              direction="right"
+              distance={100}
+            >
+              {/* Expert Coach */}
+              <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
+                <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
                 </div>
-
-                {/* Active Team */}
-                <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
-                  <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
-                    ACTIVE TEAM
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit,
-                    convallis varius sociosqu ullamcorper molestie maecenas.
-                  </p>
-                </div>
-
-                {/* Smart Program */}
-                <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
-                  <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
-                    SMART PROGRAM
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit,
-                    convallis varius sociosqu ullamcorper molestie maecenas.
-                  </p>
-                </div>
-
-                {/* Special Event */}
-                <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
-                  <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
-                    SPECIAL EVENT
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit,
-                    convallis varius sociosqu ullamcorper molestie maecenas.
-                  </p>
-                </div>
+                <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
+                  EXPERT COACH
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit,
+                  convallis varius sociosqu ullamcorper molestie maecenas.
+                </p>
               </div>
 
-              {/* Right Side - Join Our Journey */}
-              <div className="lg:col-span-5">
+              {/* Active Team */}
+              <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
+                <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
+                  ACTIVE TEAM
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit,
+                  convallis varius sociosqu ullamcorper molestie maecenas.
+                </p>
+              </div>
+
+              {/* Smart Program */}
+              <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
+                <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
+                  SMART PROGRAM
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit,
+                  convallis varius sociosqu ullamcorper molestie maecenas.
+                </p>
+              </div>
+
+              {/* Special Event */}
+              <div className="bg-[rgb(var(--secondary))] rounded-lg p-8">
+                <div className="w-16 h-16 bg-red-500 rounded flex items-center justify-center mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-extrabold mb-4 uppercase tracking-wide">
+                  SPECIAL EVENT
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit,
+                  convallis varius sociosqu ullamcorper molestie maecenas.
+                </p>
+              </div>
+            </ScrollAnimation>
+            {/* Right Side - Join Our Journey */}
+            <ScrollAnimation
+              className="lg:col-span-5"
+              direction="left"
+              distance={100}
+            >
+              <div>
                 <div className="bg-[rgb(var(--secondary))] rounded-lg p-8 h-full flex flex-col">
                   <h2 className="text-3xl md:text-4xl font-extrabold mb-6 uppercase">
                     Join Our Journey
@@ -352,17 +364,17 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold">
-                        Over 10,000+ Active
+                        Over 20,000+ Active
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        Runners Worldwide
+                        Runners Kolkata
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ScrollAnimation>
+            </ScrollAnimation>
+          </div>
         </div>
       </section>
 
@@ -370,11 +382,14 @@ export default function Home() {
       <section className="py-20 bg-stone-800">
         <div className="container mx-auto px-4">
           <div className="flex items-start justify-between mb-8 gap-4">
-            <h2 className="text-5xl md:text-6xl font-extrabold text-white">
-              BUILD POWER
-              <br />
-              EVERY DAY
-            </h2>
+            <div>
+              <p className="text-sm text-red-500 font-semibold uppercase">
+                BUILD
+              </p>
+              <h2 className="text-5xl font-extrabold mb-2 text-white">
+                POWER EVERY DAY
+              </h2>
+            </div>
             <div className="ml-auto">
               <a
                 href="/portfolio"
@@ -387,7 +402,11 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Card 1 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg">
+            <ScrollAnimation
+              className="relative rounded-lg overflow-hidden shadow-lg"
+              direction="up"
+              distance={32}
+            >
               <img
                 src="/static-sprintothon/images/portfolio/club-1.jpg"
                 alt="Urban Pace Club"
@@ -405,10 +424,14 @@ export default function Home() {
                   DISCOVER MORE →
                 </a>
               </div>
-            </div>
+            </ScrollAnimation>
 
             {/* Card 2 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg">
+            <ScrollAnimation
+              className="relative rounded-lg overflow-hidden shadow-lg"
+              direction="up"
+              distance={32}
+            >
               <img
                 src="/static-sprintothon/images/portfolio/club-2.jpg"
                 alt="Marathon Club"
@@ -426,10 +449,14 @@ export default function Home() {
                   DISCOVER MORE →
                 </a>
               </div>
-            </div>
+            </ScrollAnimation>
 
             {/* Card 3 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg">
+            <ScrollAnimation
+              className="relative rounded-lg overflow-hidden shadow-lg"
+              direction="up"
+              distance={32}
+            >
               <img
                 src="/static-sprintothon/images/portfolio/club-3.jpg"
                 alt="Event Prep"
@@ -447,10 +474,14 @@ export default function Home() {
                   DISCOVER MORE →
                 </a>
               </div>
-            </div>
+            </ScrollAnimation>
 
             {/* Card 4 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg">
+            <ScrollAnimation
+              className="relative rounded-lg overflow-hidden shadow-lg"
+              direction="up"
+              distance={32}
+            >
               <img
                 src="/static-sprintothon/images/portfolio/club-4.jpg"
                 alt="Stamina Boost"
@@ -468,7 +499,7 @@ export default function Home() {
                   DISCOVER MORE →
                 </a>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -482,7 +513,7 @@ export default function Home() {
                 Event
               </p>
               <h2 className="text-5xl font-extrabold mb-2">
-                Race For The Moment
+                RACE FOR THE MOMENT
               </h2>
             </div>
             <div>
@@ -497,9 +528,11 @@ export default function Home() {
 
           <div className="space-y-6">
             {eventCategory.map((event, index) => (
-              <div
+              <ScrollAnimation
                 key={index}
                 className="bg-[rgb(var(--secondary))] rounded-lg shadow-md overflow-hidden grid grid-cols-12 items-center"
+                direction="up"
+                distance={100}
               >
                 <div className="col-span-5 p-8">
                   <h3 className="text-2xl font-extrabold mb-3">
@@ -551,21 +584,46 @@ export default function Home() {
                 </div>
 
                 <div className="col-span-5 p-8 flex flex-col items-center">
-                  <div className="text-4xl font-extrabold mb-2">
-                    ₹{event.price}
-                    <span className="text-sm text-gray-500 mb-4">/Ticket</span>
+                  <div className="relative">
+                    {event.regularPrice && (
+                      <div className="absolute -top-6 -right-4 bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                        SAVE{" "}
+                        {Math.round(
+                          ((event.regularPrice - event.price) /
+                            event.regularPrice) *
+                            100
+                        )}
+                        %
+                      </div>
+                    )}
+                    <div className="text-4xl font-extrabold mb-2">
+                      ₹{event.price}
+                      {event.regularPrice && (
+                        <span className="text-lg line-through text-gray-500 font-normal ml-2">
+                          ₹{event.regularPrice}
+                        </span>
+                      )}
+                      <span className="text-sm text-gray-500 ml-1">
+                        /Ticket
+                      </span>
+                    </div>
+                    {event.regularPrice && (
+                      <div className="text-center text-sm text-green-600 dark:text-green-500 font-semibold mt-1">
+                        You save ₹{event.regularPrice - event.price}!
+                      </div>
+                    )}
                   </div>
 
                   <a
                     href={`/static-sprintothon/register?event=${encodeURIComponent(
                       event.title
                     )}`}
-                    className="px-6 py-3 bg-red-600 text-white rounded font-semibold hover:bg-red-700 transition"
+                    className="mt-4 px-6 py-3 bg-red-600 text-white rounded font-semibold hover:bg-red-700 transition hover:scale-105"
                   >
                     Buy Ticket
                   </a>
                 </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
@@ -578,12 +636,17 @@ export default function Home() {
             <p className="text-sm text-red-500 font-semibold uppercase mb-2">
               Trainers
             </p>
-            <h2 className="text-5xl font-extrabold">Train With Real Passion</h2>
+            <h2 className="text-5xl font-extrabold">TRAIN WITH PASSION</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {trainers.map((trainer, index) => (
-              <div key={index} className="group relative">
+              <ScrollAnimation
+                key={index}
+                className="group relative"
+                direction="up"
+                distance={100}
+              >
                 <div className="relative overflow-hidden rounded-lg">
                   <img
                     src={trainer.image}
@@ -634,7 +697,7 @@ export default function Home() {
                   <h3 className="text-2xl font-extrabold">{trainer.name}</h3>
                   <p className="text-muted-foreground">{trainer.role}</p>
                 </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
