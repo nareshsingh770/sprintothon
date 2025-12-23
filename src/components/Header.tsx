@@ -20,7 +20,7 @@ export default function Header() {
           className="text-2xl font-bold text-orange-600"
           onClick={closeMenu}
         >
-          Sprintothon
+          <img src={"/logo.png"} alt="logo" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -28,10 +28,10 @@ export default function Header() {
           <Link href="/" className="text-orange-600 font-medium">
             Home
           </Link>
-          <Link href="#aboutus" className="text-orange-600 font-medium">
+          <Link href="/#aboutus" className="text-orange-600 font-medium">
             About Us
           </Link>
-          <Link href="#events" className="text-orange-600 font-medium">
+          <Link href="/#events" className="text-orange-600 font-medium">
             Events
           </Link>
           <Link href="/contact-us" className="text-orange-600 font-medium">
@@ -69,18 +69,25 @@ export default function Header() {
               Home
             </Link>
             <Link
-              href="/portfolio"
+              href="/#aboutus"
               className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
               onClick={closeMenu}
             >
-              Portfolio
+              About Us
             </Link>
             <Link
-              href="/blogs"
+              href="/#events"
               className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
               onClick={closeMenu}
             >
-              Blogs
+              Events
+            </Link>
+            <Link
+              href="/contact-us"
+              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
+              onClick={closeMenu}
+            >
+              Contact Us
             </Link>
           </div>
         </nav>

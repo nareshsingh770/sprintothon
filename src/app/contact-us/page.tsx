@@ -25,11 +25,7 @@ export default function ContactUs() {
         </svg>
       ),
       title: "Visit Us",
-      details: [
-        "123 Marathon Street",
-        "Athletic District",
-        "New York, NY 10001",
-      ],
+      details: ["Laxmi Nagar, Delhi", "East Delhi, India", "Pincode - 110092"],
     },
     {
       icon: (
@@ -48,7 +44,7 @@ export default function ContactUs() {
         </svg>
       ),
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "+1 (555) 987-6543", "Mon-Fri: 9AM - 6PM"],
+      details: ["+91 958274045 ", "+91 8882650421", "Mon-Fri: 9AM - 6PM"],
     },
     {
       icon: (
@@ -69,7 +65,7 @@ export default function ContactUs() {
       title: "Email Us",
       details: [
         "info@sprintothon.com",
-        "support@sprintothon.com",
+        "connect@sprintothon.com",
         "We reply within 24 hours",
       ],
     },
@@ -115,7 +111,7 @@ export default function ContactUs() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+    <main className="min-h-screen bg-[rgb(var(--background))] pt-30">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-blue-500/10 dark:from-orange-500/5 dark:to-blue-500/5" />
@@ -125,7 +121,7 @@ export default function ContactUs() {
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
                 Get In Touch
               </h1>
-              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300">
+              <p className="text-lg md:text-xl">
                 Have questions about Sprintothon? We'd love to hear from you.
                 Reach out to us through any of the following channels.
               </p>
@@ -144,22 +140,20 @@ export default function ContactUs() {
                 direction={index === 0 ? "left" : index === 1 ? "up" : "right"}
                 distance={48}
               >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-gray-700">
+                <div className="bg-[rgb(var(--secondary))] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-gray-700">
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
                       {info.icon}
                     </div>
-                    <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                      {info.title}
-                    </h3>
+                    <h3 className="text-xl font-bold mb-4 ">{info.title}</h3>
                     <div className="space-y-2">
                       {info.details.map((detail, idx) => (
                         <p
                           key={idx}
                           className={`${
                             idx === info.details.length - 1
-                              ? "text-sm text-gray-500 dark:text-gray-400 mt-4 italic"
-                              : "text-gray-700 dark:text-gray-300"
+                              ? "text-sm  mt-4 italic"
+                              : "text-gray-500"
                           }`}
                         >
                           {detail}
@@ -181,7 +175,7 @@ export default function ContactUs() {
             <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl">
               <div className="relative h-96 bg-gray-200 dark:bg-gray-700">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1639587287815!5m2!1sen!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.9696242341083!2d77.27493821135316!3d28.63067247556433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfcad18e74289%3A0x34d861fdb781a88e!2sLaxmi%20Nagar%20Metro%20Station!5e0!3m2!1sen!2sin!4v1766498528314!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

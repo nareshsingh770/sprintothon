@@ -15,18 +15,28 @@ export default function RegistrationForm({
   eventonChange: (event: any) => void;
 }) {
   const [formData, setFormData] = useState<RegistrationFormData>({
-    firstname: "naresh",
-    lastname: "singh",
-    gender: "male" as "male" | "female" | "other",
-    tShirtSize: "S" as "XS" | "S" | "M" | "L" | "XL" | "XXL",
+    firstname: "",
+    lastname: "",
+    gender: "male" as "male" | "female" | "Transgender" | "Prefer Not to Say",
+    tShirtSize: "S" as
+      | "XS"
+      | "S"
+      | "M"
+      | "L"
+      | "XL"
+      | "XXL"
+      | "XXXL"
+      | "4XL"
+      | "5XL",
     marathonCategory: "",
-    mobile: "9318498567",
-    email: "nsingh770@gmail.com",
-    age: "32",
+    mobile: "",
+    email: "",
+    age: "",
     country: "india",
-    address: "shakarpur delhi",
-    pincode: "110092",
-    message: "hello world",
+    address: "",
+    pincode: "",
+    message: "",
+    acknowledgment: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,25 +69,44 @@ export default function RegistrationForm({
   }, [selectedEvent]);
 
   const handlePayment = () => {
-    debugger;
     if (!selectedEvent) return;
 
+    const totalAmount =
+      selectedEvent?.price + Math.round((selectedEvent?.price + 21) * 0.18) ||
+      0;
+
     const options = {
-      key: "rzp_test_Rh7WyPFZvapNWD",
-      amount: selectedEvent ? selectedEvent.price * 100 : 0, // Amount in paise (500 rupees)
+      key: "rzp_live_Rjr6kDsmmEBbfb",
+      amount: totalAmount * 100, // Amount in paise
       currency: "INR",
       name: "Marathon Registration",
       description: `${selectedEvent.title} Marathon Registration`,
       image: "/logo.png", // Your logo
+      config: {
+        display: {
+          preferences: {
+            show_default_blocks: false,
+          },
+          blocks: {
+            upi: {
+              name: "Pay using UPI",
+              instruments: [
+                {
+                  method: "upi",
+                },
+              ],
+            },
+          },
+          sequence: ["block.upi"],
+        },
+      },
       theme: {
         color: "#db2777", // Pink color
       },
       handler: function (response: any) {
-        console.log("Payment successful:", response);
-        alert(
-          "Payment successful! Payment ID: " + response.razorpay_payment_id
-        );
+        alert("Payment successful! Thank you for registering.");
         setShowPaymentButton(false);
+        window.location.href = "/";
       },
       modal: {
         ondismiss: function () {
@@ -127,8 +156,17 @@ export default function RegistrationForm({
       setFormData({
         firstname: "",
         lastname: "",
-        gender: "" as "male" | "female" | "other",
-        tShirtSize: "" as "XS" | "S" | "M" | "L" | "XL" | "XXL",
+        gender: "" as "male" | "female" | "Transgender" | "Prefer Not to Say",
+        tShirtSize: "" as
+          | "XS"
+          | "S"
+          | "M"
+          | "L"
+          | "XL"
+          | "XXL"
+          | "XXXL"
+          | "4XL"
+          | "5XL",
         marathonCategory: "",
         mobile: "",
         email: "",
@@ -137,6 +175,7 @@ export default function RegistrationForm({
         address: "",
         pincode: "",
         message: "",
+        acknowledgment: false,
       });
       setErrors({});
     } catch (error) {
@@ -158,7 +197,7 @@ export default function RegistrationForm({
           <input
             id="firstname"
             type="text"
-            placeholder="John"
+            placeholder="First Name"
             value={formData.firstname}
             onChange={(e) => {
               setFormData({ ...formData, firstname: e.target.value });
@@ -182,7 +221,7 @@ export default function RegistrationForm({
           <input
             id="lastname"
             type="text"
-            placeholder="Doe"
+            placeholder="Last Name"
             value={formData.lastname}
             onChange={(e) => {
               setFormData({ ...formData, lastname: e.target.value });
@@ -211,7 +250,11 @@ export default function RegistrationForm({
             onChange={(e) => {
               setFormData({
                 ...formData,
-                gender: e.target.value as "male" | "female" | "other",
+                gender: e.target.value as
+                  | "male"
+                  | "female"
+                  | "Transgender"
+                  | "Prefer Not to Say",
               });
               if (errors.gender) setErrors({ ...errors, gender: "" });
             }}
@@ -222,7 +265,8 @@ export default function RegistrationForm({
             <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="other">Transgender</option>
+            <option value="other">Prefer Not to Say</option>
           </select>
           {errors.gender && (
             <p className="text-red-600 dark:text-red-400 text-sm mt-1">
@@ -291,6 +335,9 @@ export default function RegistrationForm({
             <option value="L">L</option>
             <option value="XL">XL</option>
             <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+            <option value="4XL">4XL</option>
+            <option value="5XL">5XL</option>
           </select>
           {errors.tShirtSize && (
             <p className="text-red-600 dark:text-red-400 text-sm mt-1">
@@ -327,6 +374,7 @@ export default function RegistrationForm({
               errors.marathonCategory ? "border-red-500" : ""
             }`}
           >
+            <option value="">Select Category</option>
             {eventCategory.map((category, index) => (
               <option key={index} value={category.title}>
                 {category.title}
@@ -348,7 +396,7 @@ export default function RegistrationForm({
         <input
           id="email"
           type="email"
-          placeholder="john@example.com"
+          placeholder="xyz@example.com"
           value={formData.email}
           onChange={(e) => {
             setFormData({ ...formData, email: e.target.value });
@@ -372,7 +420,7 @@ export default function RegistrationForm({
         <input
           id="mobile"
           type="tel"
-          placeholder="+91 9876543210"
+          placeholder="+91 9999999999"
           value={formData.mobile}
           onChange={(e) => {
             setFormData({ ...formData, mobile: e.target.value });
@@ -420,7 +468,7 @@ export default function RegistrationForm({
         <input
           id="pincode"
           type="text"
-          placeholder="400001"
+          placeholder="110001"
           maxLength={6}
           value={formData.pincode}
           onChange={(e) => {
@@ -462,24 +510,55 @@ export default function RegistrationForm({
         )}
       </div>
 
+      {/* Acknowledgment Checkbox */}
+      <div className="flex items-start mb-6">
+        <input
+          id="acknowledgment"
+          type="checkbox"
+          className="mt-1 mr-2 accent-pink-600"
+          checked={!!formData.acknowledgment}
+          onChange={(e) =>
+            setFormData({ ...formData, acknowledgment: e.target.checked })
+          }
+        />
+        <label htmlFor="acknowledgment" className="text-sm select-none">
+          I have read and agree to the
+          <a
+            href="/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pink-600 underline mx-1"
+          >
+            Privacy Policy
+          </a>
+          and
+          <a
+            href="/cancellation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pink-600 underline mx-1"
+          >
+            Cancellation Policy
+          </a>
+          .
+        </label>
+      </div>
+
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-pink-600 text-white border-2 cursor-pointer border-pink-600 rounded-lg font-semibold hover:bg-pink-700 transition-all hover:scale-105 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        disabled={isSubmitting || !formData.acknowledgment}
+        className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-orange-600 text-white border-2 cursor-pointer border-pink-600 rounded-lg font-semibold hover:bg-orange-700 transition-all hover:scale-105 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
         {isSubmitting
           ? "Submitting..."
-          : `Register and Pay ₹${
-              selectedEvent ? selectedEvent.price : ""
-            } with Razorpay`}
+          : `Register and Pay ₹${selectedEvent?.price || 0} with Razorpay`}
         <Send className="h-4 w-4" />
       </button>
 
       {submitStatus === "success" && (
         <div className="space-y-4">
           <p className="text-green-600 dark:text-green-400 text-center font-medium">
-            Registration submitted successfully! Please complete the payment
-            below.
+            Registration submitted successfully!
           </p>
         </div>
       )}

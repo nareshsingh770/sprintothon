@@ -28,10 +28,10 @@ export const registrationFormSchema = z.object({
     .string()
     .min(2, "Last name must be at least 2 characters")
     .regex(/^[a-zA-Z]+$/, "Last name can only contain letters"),
-  gender: z.enum(["male", "female", "other"], {
+  gender: z.enum(["male", "female", "Transgender", "Prefer Not to Say"], {
     message: "Please select a gender",
   }),
-  tShirtSize: z.enum(["XS", "S", "M", "L", "XL", "XXL"], {
+  tShirtSize: z.enum(["XS", "S", "M", "L", "XL", "XXL", "XXXL", "4XL", "5XL"], {
     message: "Please select a t-shirt size",
   }),
   marathonCategory: z.string().min(1, "Please select a marathon category"),
@@ -50,6 +50,9 @@ export const registrationFormSchema = z.object({
   address: z.string().min(10, "Address must be at least 10 characters"),
   pincode: z.string().regex(/^\d{6}$/, "Please enter a valid 6-digit pincode"),
   message: z.string().optional(),
+  acknowledgment: z.boolean().refine((val) => val === true, {
+    message: "You must acknowledge the terms and conditions",
+  }),
 });
 
 export type RegistrationFormData = z.infer<typeof registrationFormSchema>;

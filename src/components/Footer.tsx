@@ -18,7 +18,7 @@ export default function Footer() {
           {/* Logo and Tagline */}
           <div className="space-y-4">
             <Link className="block mb-4" href={"/"}>
-              <img className={"h-10"} src={"/images/logo.png"} alt="logo" />
+              <img src={"/logo.png"} alt="logo" />
             </Link>
             <p className="text-muted-foreground">
               Building digital excellence with cutting-edge technology and
@@ -64,36 +64,36 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/portfolio"
+                  href="/#aboutus"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Portfolio
+                  About Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/blogs"
+                  href="/#events"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Blogs
+                  Events
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#services"
+                  href="/contact-us"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Services
+                  Contact Us
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/#team"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Team
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -103,10 +103,46 @@ export default function Footer() {
               Support
             </h4>
             <ul className="space-y-2">
-              <li className="text-muted-foreground">Terms & Conditions</li>
-              <li className="text-muted-foreground">Privacy Policy</li>
-              <li className="text-muted-foreground">Contact Support</li>
-              <li className="text-muted-foreground">Help Center</li>
+              <li>
+                <a
+                  href="/terms"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Terms & Conditions
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/cancellation"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Cancellation and Refund
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:connect@sprintothon.com"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Contact Support
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:info@sprintothon.com"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Help Center
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -119,19 +155,19 @@ export default function Footer() {
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Mail className="h-5 w-5 mt-0.5 text-orange-600" />
                 <a
-                  href="mailto:info@portfolio.com"
+                  href="mailto:connect@sprintothon.com"
                   className="hover:text-primary transition-colors"
                 >
-                  nexgensoft642@gmail.com
+                  connect@sprintothon.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Phone className="h-5 w-5 mt-0.5 text-orange-600" />
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+919582740454"
                   className="hover:text-primary transition-colors"
                 >
-                  Member Stories
+                  +91 9582740454
                 </a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
@@ -167,10 +203,10 @@ export default function Footer() {
                 Privacy Policy
               </Link>
               <Link
-                href="/terms"
+                href="/cancellation"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                Terms of Service
+                Cancellation and Refund
               </Link>
             </div>
           </div>
