@@ -3,7 +3,7 @@ import React from "react";
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-[rgb(var(--background))] py-10 px-4 md:px-8 lg:px-32">
-      <div className="container mx-auto rounded-xl shadow-lg p-8">
+      <div className="container mx-auto rounded-xl shadow-lg p-8 mt-40">
         <h1 className="text-3xl md:text-4xl font-bold text-orange-600 mb-6 text-center mb-8">
           Privacy Policy & Terms of Service
         </h1>

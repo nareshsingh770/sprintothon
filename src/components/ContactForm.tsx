@@ -43,12 +43,12 @@ export default function ContactForm() {
 
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbwCN4-tKJWluwlu7AJVtFYRjGU-aT1hidGGYJUx6xx0eh2Cdp78TeMIqCjPTLnVa5jgfQ/exec",
+        "https://script.google.com/macros/s/AKfycbxLdI1r1l86nVSArb-Un0gg3QKGw36pqtTK06P8QFJS9hkH2qejFvRfemhqlxTP6HY/exec",
         {
           method: "POST",
           mode: "no-cors", // Required for Google Apps Script
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({ type: "contact", ...formData }),
         }
       );
       console.log(response, "response_response");

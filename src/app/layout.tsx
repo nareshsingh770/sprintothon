@@ -8,9 +8,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Web & App Development",
-  description:
-    "Professional web development, app development, and digital services",
+  title: "Sprintothon - Building a Stronger Tomorrow",
+  description: "Sprintothon: Run, Walk, Unite. Achieve the Impossible.",
 };
 
 export default function RootLayout({
@@ -20,6 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
       <body className={`${inter.className} bg-slate-100`}>
         <Header />
         {children}

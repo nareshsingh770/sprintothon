@@ -1,9 +1,7 @@
 import ScrollAnimation from "../components/ScrollAnimation";
-import ContactForm from "../components/ContactForm";
 import CountdownTimer from "../components/CountdownTimer";
+import { eventCategory } from "@/lib/appConstant";
 
-import { eventCategory, facts, services, trainers } from "@/lib/appConstant";
-import { Scroll } from "lucide-react";
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -95,9 +93,9 @@ export default function Home() {
                             29th March, 2026
                           </span>
                         </div>
-                        <div className="hidden md:inline-block ml-2 mt-4 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full animate-bounce">
+                        <div className="md:inline-block ml-2 mt-4 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full animate-bounce">
                           Early Bird tickets are limited- Only the first 50
-                          registrations will get huge discounts!
+                          registrations will get 50% discount!
                         </div>
                       </div>
                     </div>
@@ -107,7 +105,7 @@ export default function Home() {
             </div>
           </ScrollAnimation>
           {/* Overlapping Profile Images */}
-          <ScrollAnimation direction="up" distance={32}>
+          {/* <ScrollAnimation direction="up" distance={32}>
             <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full px-6 py-3 w-[400px] mt-24">
               <div className="flex -space-x-3">
                 <img
@@ -131,7 +129,6 @@ export default function Home() {
                   className="w-12 h-12 rounded-full border-2 border-white object-cover"
                 />
               </div>
-              {/* Text */}
               <div className="text-white">
                 <p className="font-semibold text-sm leading-tight">
                   Over 20,000+ Active
@@ -141,7 +138,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-          </ScrollAnimation>
+          </ScrollAnimation> */}
         </div>
 
         {/* Scroll Indicator */}
@@ -182,7 +179,10 @@ export default function Home() {
                 Massive Cash Rewards
               </h2>
               <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto">
-                Compete and win exciting cash prizes in every category!
+                <span className="font-bold uppercase text-amber-200 blink">
+                  Run, Walk and even Sit
+                </span>{" "}
+                to win exciting cash prizes in every category!
               </p>
             </div>
           </ScrollAnimation>
@@ -278,6 +278,149 @@ export default function Home() {
               </div>
             </div>
           </ScrollAnimation>
+        </div>
+      </section>
+
+      {/* Events / Upcoming Races Section */}
+      <section className="py-20 bg-[rgb(var(--background))]" id="events">
+        <div className="container mx-auto px-4">
+          <div className="flex items-start justify-between mb-8">
+            <div>
+              <p className="text-sm text-red-500 font-semibold uppercase">
+                Event
+              </p>
+              <h2 className="text-5xl font-extrabold mb-2">
+                FAMILYTHON FOR THE MEMORIES
+              </h2>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            {eventCategory.map((event, index) => (
+              <ScrollAnimation
+                key={index}
+                className="bg-[rgb(var(--secondary))] rounded-lg shadow-md"
+                direction="up"
+                distance={100}
+              >
+                <div className="flex flex-col md:grid md:grid-cols-12 md:items-center">
+                  {/* Event Details */}
+                  <div className="col-span-12 md:col-span-4 p-4 md:p-8">
+                    <h3 className="text-xl md:text-2xl font-extrabold mb-2 md:mb-3">
+                      {event.title}{" "}
+                      <span className="text-[0.75rem] text-gray-500 font-medium">
+                        ({event.age_group})
+                      </span>
+                    </h3>
+                    <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
+                      {event.description}
+                    </p>
+                    <div className="text-xs md:text-sm text-gray-500 flex flex-wrap items-center gap-2 md:gap-4">
+                      <span className="inline-flex items-center gap-1 md:gap-2">
+                        <svg
+                          className="w-3 h-3 md:w-4 md:h-4 text-red-500"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 2a6 6 0 00-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 00-6-6z" />
+                        </svg>{" "}
+                        {event.location}
+                      </span>
+                      <span className="inline-flex items-center gap-1 md:gap-2">
+                        <svg
+                          className="w-3 h-3 md:w-4 md:h-4 text-red-500"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M6 2a1 1 0 00-1 1v14l6-3 6 3V3a1 1 0 00-1-1H6z" />
+                        </svg>{" "}
+                        {event.time}
+                      </span>
+                      <span className="inline-flex items-center gap-1 md:gap-2">
+                        <svg
+                          className="w-3 h-3 md:w-4 md:h-4 text-red-500"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M6 2a1 1 0 00-1 1v14l6-3 6 3V3a1 1 0 00-1-1H6z" />
+                        </svg>{" "}
+                        {event.date}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Event Image - Hidden on mobile */}
+                  <div className="hidden md:block md:col-span-3">
+                    <img
+                      src={event.image}
+                      alt={event.alt}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Pricing Section */}
+                  <div className="col-span-12 md:col-span-5 p-2 flex flex-col items-center justify-center">
+                    <div className="relative w-full md:max-w-xs">
+                      {/* Discount Badge */}
+                      {event.regularPrice && (
+                        <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 z-10">
+                          <div className="relative animate-bounce">
+                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-600 rounded-full blur-sm opacity-60"></div>
+                            <div className="relative bg-gradient-to-br from-orange-500 to-red-600 text-white text-[0.6rem] md:text-[0.65rem] font-black px-2 py-1 md:px-3 md:py-1.5 rounded-full shadow-lg">
+                              {Math.round(
+                                ((event.regularPrice - event.price) /
+                                  event.regularPrice) *
+                                  100
+                              )}
+                              % OFF
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Pricing Card */}
+                      <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-800 dark:to-gray-900 rounded-lg md:rounded-xl p-3 md:p-4 shadow-lg border-2 border-orange-200 dark:border-orange-900">
+                        {/* Price Section */}
+                        <div className="text-center mb-2 md:mb-3">
+                          <div className="flex items-baseline justify-center gap-1.5 md:gap-2">
+                            <span className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">
+                              ₹{event.price}
+                            </span>
+                            {event.regularPrice && (
+                              <span className="text-sm md:text-base line-through text-gray-400 font-medium">
+                                ₹{event.regularPrice}
+                              </span>
+                            )}
+                          </div>
+                          {event.regularPrice && (
+                            <div className="inline-flex items-center gap-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-[0.6rem] md:text-[0.65rem] font-bold px-2 py-0.5 rounded-full mt-1">
+                              <span>💰</span>
+                              <span>
+                                Save ₹{event.regularPrice - event.price}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Countdown Timer */}
+                        <CountdownTimer />
+
+                        {/* CTA Button */}
+                        <a
+                          href={`/register?event=${encodeURIComponent(
+                            event.title
+                          )}`}
+                          className="w-full mt-2 md:mt-3 block text-center px-3 md:px-4 py-3 md:py-2 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-lg font-bold hover:from-red-700 hover:to-orange-700 transition-all hover:scale-105 hover:shadow-lg transform uppercase text-[0.65rem] md:text-xs tracking-wide"
+                        >
+                          🎟️ Buy Ticket Now
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -515,7 +658,7 @@ export default function Home() {
                       className="w-full h-full object-cover"
                     />
                     {/* Play Button Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    {/* <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                       <button className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg">
                         <svg
                           className="w-8 h-8 text-white ml-1"
@@ -525,11 +668,11 @@ export default function Home() {
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </button>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Avatars + Stats */}
-                  <div className="mt-6 bg-[rgb(var(--background))] p-4 rounded-lg flex items-center gap-4 shadow-sm border border-gray-100">
+                  {/* <div className="mt-6 bg-[rgb(var(--background))] p-4 rounded-lg flex items-center gap-4 shadow-sm border border-gray-100">
                     <div className="flex -space-x-3">
                       <img
                         src="/images/profiles/profile-1.png"
@@ -560,7 +703,7 @@ export default function Home() {
                         Runners Kolkata
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </ScrollAnimation>
@@ -699,149 +842,6 @@ export default function Home() {
                 </a> */}
               </div>
             </ScrollAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* Events / Upcoming Races Section */}
-      <section className="py-20 bg-[rgb(var(--background))]" id="events">
-        <div className="container mx-auto px-4">
-          <div className="flex items-start justify-between mb-8">
-            <div>
-              <p className="text-sm text-red-500 font-semibold uppercase">
-                Event
-              </p>
-              <h2 className="text-5xl font-extrabold mb-2">
-                RACE FOR THE MOMENT
-              </h2>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            {eventCategory.map((event, index) => (
-              <ScrollAnimation
-                key={index}
-                className="bg-[rgb(var(--secondary))] rounded-lg shadow-md"
-                direction="up"
-                distance={100}
-              >
-                <div className="flex flex-col md:grid md:grid-cols-12 md:items-center">
-                  {/* Event Details */}
-                  <div className="col-span-12 md:col-span-4 p-4 md:p-8">
-                    <h3 className="text-xl md:text-2xl font-extrabold mb-2 md:mb-3">
-                      {event.title}{" "}
-                      <span className="text-[0.75rem] text-gray-500 font-medium">
-                        ({event.age_group})
-                      </span>
-                    </h3>
-                    <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
-                      {event.description}
-                    </p>
-                    <div className="text-xs md:text-sm text-gray-500 flex flex-wrap items-center gap-2 md:gap-4">
-                      <span className="inline-flex items-center gap-1 md:gap-2">
-                        <svg
-                          className="w-3 h-3 md:w-4 md:h-4 text-red-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M10 2a6 6 0 00-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 00-6-6z" />
-                        </svg>{" "}
-                        {event.location}
-                      </span>
-                      <span className="inline-flex items-center gap-1 md:gap-2">
-                        <svg
-                          className="w-3 h-3 md:w-4 md:h-4 text-red-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M6 2a1 1 0 00-1 1v14l6-3 6 3V3a1 1 0 00-1-1H6z" />
-                        </svg>{" "}
-                        {event.time}
-                      </span>
-                      <span className="inline-flex items-center gap-1 md:gap-2">
-                        <svg
-                          className="w-3 h-3 md:w-4 md:h-4 text-red-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M6 2a1 1 0 00-1 1v14l6-3 6 3V3a1 1 0 00-1-1H6z" />
-                        </svg>{" "}
-                        {event.date}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Event Image - Hidden on mobile */}
-                  <div className="hidden md:block md:col-span-3">
-                    <img
-                      src={event.image}
-                      alt={event.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Pricing Section */}
-                  <div className="col-span-12 md:col-span-5 p-2 flex flex-col items-center justify-center">
-                    <div className="relative w-full md:max-w-xs">
-                      {/* Discount Badge */}
-                      {event.regularPrice && (
-                        <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 z-10">
-                          <div className="relative animate-bounce">
-                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-600 rounded-full blur-sm opacity-60"></div>
-                            <div className="relative bg-gradient-to-br from-orange-500 to-red-600 text-white text-[0.6rem] md:text-[0.65rem] font-black px-2 py-1 md:px-3 md:py-1.5 rounded-full shadow-lg">
-                              {Math.round(
-                                ((event.regularPrice - event.price) /
-                                  event.regularPrice) *
-                                  100
-                              )}
-                              % OFF
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Pricing Card */}
-                      <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-800 dark:to-gray-900 rounded-lg md:rounded-xl p-3 md:p-4 shadow-lg border-2 border-orange-200 dark:border-orange-900">
-                        {/* Price Section */}
-                        <div className="text-center mb-2 md:mb-3">
-                          <div className="flex items-baseline justify-center gap-1.5 md:gap-2">
-                            <span className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">
-                              ₹{event.price}
-                            </span>
-                            {event.regularPrice && (
-                              <span className="text-sm md:text-base line-through text-gray-400 font-medium">
-                                ₹{event.regularPrice}
-                              </span>
-                            )}
-                          </div>
-                          {event.regularPrice && (
-                            <div className="inline-flex items-center gap-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-[0.6rem] md:text-[0.65rem] font-bold px-2 py-0.5 rounded-full mt-1">
-                              <span>💰</span>
-                              <span>
-                                Save ₹{event.regularPrice - event.price}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Countdown Timer */}
-                        <CountdownTimer />
-
-                        {/* CTA Button */}
-                        <a
-                          href={`/register?event=${encodeURIComponent(
-                            event.title
-                          )}`}
-                          className="w-full mt-2 md:mt-3 block text-center px-3 md:px-4 py-3 md:py-2 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-lg font-bold hover:from-red-700 hover:to-orange-700 transition-all hover:scale-105 hover:shadow-lg transform uppercase text-[0.65rem] md:text-xs tracking-wide"
-                        >
-                          🎟️ Buy Ticket Now
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ScrollAnimation>
-            ))}
           </div>
         </div>
       </section>

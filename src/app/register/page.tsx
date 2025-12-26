@@ -90,20 +90,25 @@ function RegistrationContent() {
                     <span className="font-medium">₹{selectedEvent.price}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Platform Fee</span>
-                    <span className="font-medium">+₹21</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">GST (18%)</span>
                     <span className="font-medium">
-                      ₹{Math.round((selectedEvent.price + 21) * 0.18)}
+                      +₹{(selectedEvent?.price || 0) * 0.18}
                     </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Platform Fee</span>
+                    <span className="font-medium">+₹21</span>
                   </div>
                   <div className="border-t border-gray-600 pt-3 mt-3">
                     <div className="flex justify-between">
                       <span className="font-bold text-lg">Total Amount</span>
                       <span className="font-bold text-lg text-pink-600">
-                        ₹{selectedEvent.price}
+                        ₹
+                        {(
+                          Number(selectedEvent?.price) +
+                          Number(selectedEvent?.price) * 0.18 +
+                          21
+                        ).toFixed(2)}
                       </span>
                     </div>
                   </div>

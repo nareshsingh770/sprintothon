@@ -20,7 +20,7 @@ export default function Header() {
           className="text-2xl font-bold text-orange-600"
           onClick={closeMenu}
         >
-          <img src={"/logo.png"} alt="logo" />
+          <img className="h-17 md:h-24" src={"/logo.png"} alt="logo" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -33,6 +33,9 @@ export default function Header() {
           </Link>
           <Link href="/#events" className="text-orange-600 font-medium">
             Events
+          </Link>
+          <Link href="/sponsors" className="text-orange-600 font-medium">
+            Sponsors
           </Link>
           <Link href="/contact-us" className="text-orange-600 font-medium">
             Contact Us
@@ -81,6 +84,13 @@ export default function Header() {
               onClick={closeMenu}
             >
               Events
+            </Link>
+            <Link
+              href="/sponsors"
+              className="px-4 py-2 rounded-lg hover:bg-muted transition-colors text-orange-400"
+              onClick={closeMenu}
+            >
+              Sponsors
             </Link>
             <Link
               href="/contact-us"

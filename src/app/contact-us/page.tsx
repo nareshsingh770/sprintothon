@@ -44,7 +44,7 @@ export default function ContactUs() {
         </svg>
       ),
       title: "Call Us",
-      details: ["+91 958274045 ", "+91 8882650421", "Mon-Fri: 9AM - 6PM"],
+      details: ["+91 9582740454 ", "+91 8882650421", "Mon-Fri: 9AM - 6PM"],
     },
     {
       icon: (
@@ -65,7 +65,7 @@ export default function ContactUs() {
       title: "Email Us",
       details: [
         "info@sprintothon.com",
-        "connect@sprintothon.com",
+        "contact@sprintothon.com",
         "We reply within 24 hours",
       ],
     },
@@ -201,7 +201,7 @@ export default function ContactUs() {
                   Stay connected with us on social media for the latest updates,
                   training tips, and community events.
                 </p>
-                <div className="flex gap-4">
+                {/* <div className="flex gap-4">
                   {socialLinks.map((social, index) => (
                     <a
                       key={index}
@@ -212,7 +212,7 @@ export default function ContactUs() {
                       {social.icon}
                     </a>
                   ))}
-                </div>
+                </div> */}
               </div>
             </ScrollAnimation>
 

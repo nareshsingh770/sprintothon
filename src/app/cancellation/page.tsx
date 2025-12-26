@@ -3,7 +3,7 @@ import React from "react";
 const Cancellation = () => {
   return (
     <div className="min-h-screen bg-[rgb(var(--background))] py-10 px-4 md:px-8 lg:px-32">
-      <div className="container mx-auto rounded-xl shadow-lg p-8">
+      <div className="container mx-auto rounded-xl shadow-lg p-8 mt-40">
         <h1 className="text-3xl md:text-4xl font-bold text-orange-600 mb-8 text-center">
           Cancellation and Refund Policy
         </h1>
@@ -123,7 +123,7 @@ const Cancellation = () => {
           <ul>
             <li>T&T Entertainment Private Limited</li>
             <li>C/O Ankit Tibrewal, Rinku Tyagi</li>
-            <li>Email: sprintothon..com</li>
+            <li>Email: info@sprintothon.com</li>
           </ul>
 
           <div className="mt-10">
@@ -131,48 +131,6 @@ const Cancellation = () => {
               India's #1 platform for running events, marathons & race photos.
               Join 100,000+ runners across India.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-              <div>
-                <h3 className="mb-2 font-bold">FOR RUNNERS</h3>
-                <ul>
-                  <li>Race Chronicles</li>
-                  <li>Find Events</li>
-                  <li>Race Photos</li>
-                  <li>Free Tools</li>
-                  <li>Join WhatsApp Groups</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="mb-2 font-bold">FOR ORGANIZERS</h3>
-                <ul>
-                  <li>List Your Event</li>
-                  <li>AI Photo Tagging</li>
-                  <li>Digital Certificates</li>
-                  <li>Custom Video Generation</li>
-                  <li>White Label Solutions</li>
-                  <li>Event Management</li>
-                  <li>Timing Providers</li>
-                  <li>Medal Manufacturers</li>
-                  <li>Contact Us</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="mb-2 font-bold">RESOURCES</h3>
-                <ul>
-                  <li>Running Blogs</li>
-                  <li>Running Jargons</li>
-                  <li>Running Facts</li>
-                  <li>Our Story</li>
-                  <li>FAQ</li>
-                </ul>
-                <h3 className="mb-2 font-bold mt-4">LEGAL</h3>
-                <ul>
-                  <li>Privacy Policy</li>
-                  <li>Terms & Conditions</li>
-                  <li>Cancellation Policy</li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </div>

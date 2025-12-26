@@ -72,8 +72,7 @@ export default function RegistrationForm({
     if (!selectedEvent) return;
 
     const totalAmount =
-      selectedEvent?.price + Math.round((selectedEvent?.price + 21) * 0.18) ||
-      0;
+      selectedEvent?.price + Math.round(selectedEvent?.price * 0.18) + 21 || 0;
 
     const options = {
       key: "rzp_live_Rjr6kDsmmEBbfb",
@@ -551,7 +550,11 @@ export default function RegistrationForm({
       >
         {isSubmitting
           ? "Submitting..."
-          : `Register and Pay ₹${selectedEvent?.price || 0} with Razorpay`}
+          : `Register and Pay ₹${(
+              Number(selectedEvent?.price) +
+              Number(selectedEvent?.price) * 0.18 +
+              21
+            ).toFixed(2)} with Razorpay`}
         <Send className="h-4 w-4" />
       </button>
 

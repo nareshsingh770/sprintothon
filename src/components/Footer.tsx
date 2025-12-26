@@ -1,14 +1,5 @@
 import Link from "next/link";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Github,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -25,7 +16,7 @@ export default function Footer() {
               innovative solutions.
             </p>
             {/* Social Media Icons */}
-            <div className="flex gap-4">
+            {/* <div className="flex gap-4">
               <a
                 href="https://www.facebook.com/people/Next-Generation-Software/61582076636712/"
                 target="_blank"
@@ -45,7 +36,7 @@ export default function Footer() {
               >
                 <Instagram className="h-5 w-5 text-orange-600" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
