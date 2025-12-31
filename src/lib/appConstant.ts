@@ -52,16 +52,17 @@ export const facts = [
 
 export const eventCategory = [
   {
-    title: "test 10",
-    age_group: "30 to 70 Years",
-    description:
-      "A innovation for everyone who cannot walk or run for a mile. Our tailored and specially created fitness challenge with low-impact, Sitathon welcomes you to take part—connect, stretch, and cheer together from your seat, and show that fitness has endless forms.",
+    title: "Adventure Activities for Kids and Parents",
+    age_group: "3 to 45 Years",
+    description: `Are you ready to trade your gadgets for the great Adventure and Family Time?
+In a world of MOBILE TABLETS and OTT, give your child the gift of a real-world thrill. Visit our SPRINTOTHON adventure activities, a specially designed adventure day where parents and kids don’t just watch—they participate together as a family for countless MEMORIES & JOY`,
     location: "Gaur City Stadium",
-    time: "06:30 AM onwards",
-    date: "Mar 29, 2026",
-    price: -16.9,
-    regularPrice: 1398,
-    image: "/images/category/sitathon.jpeg",
+    time: "08:30 AM onwards",
+    date: "SUNDAY, Feb 1, 2026",
+    price: 199,
+    priceRange: "129 - 599",
+    regularPrice: 1199,
+    image: "/images/category/kids.webp",
     alt: "kidathon 400 meter",
   },
   {
@@ -690,3 +691,12 @@ export const blogs: Blog[] = [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200",
   },
 ];
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCCMENQj7niQfcJDiU_LhrtEWs2BI35dFs",
+  authDomain: "sprintothon-cd194.firebaseapp.com",
+  projectId: "sprintothon-cd194",
+  storageBucket: "sprintothon-cd194.firebasestorage.app",
+  messagingSenderId: "1011205037894",
+  appId: "1:1011205037894:web:f4bee824457dbbd7680f47",
+};

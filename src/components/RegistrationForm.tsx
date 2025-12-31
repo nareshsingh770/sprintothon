@@ -7,6 +7,45 @@ import { z } from "zod";
 import { regsiterParticipant } from "@/services/apiServices";
 import { eventCategory } from "@/lib/appConstant";
 
+import {
+  getFunctions,
+  httpsCallable,
+  connectFunctionsEmulator,
+} from "firebase/functions";
+import { useFirebase } from "@/lib/FirebaseContext";
+
+const app = useFirebase();
+const functions = getFunctions(app);
+
+// Connect to the local Functions emulator in development.
+// Enable by setting NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true or running on localhost.
+if (typeof window !== "undefined") {
+  const useEmulator =
+    process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATOR === "true" ||
+    window.location.hostname === "localhost";
+  if (useEmulator) {
+    const port = Number(process.env.NEXT_PUBLIC_FIREBASE_EMULATOR_PORT || 5001);
+    try {
+      connectFunctionsEmulator(functions, "localhost", port);
+      console.log(`Connected Functions emulator on localhost:${port}`);
+    } catch (e) {
+      console.warn("Could not connect to Functions emulator:", e);
+    }
+  }
+}
+
+const callRazorpayCapturePayment = async (
+  payment_id: string,
+  amount: number
+) => {
+  const capturePayment = httpsCallable(functions, "capturePaymentHttp");
+  const res = await capturePayment({
+    payment_id: payment_id,
+    amount: amount,
+  });
+  console.log(res.data, "DEBUG Firebase cloud function response");
+};
+
 export default function RegistrationForm({
   selectedEvent,
   eventonChange,
@@ -103,9 +142,15 @@ export default function RegistrationForm({
         color: "#db2777", // Pink color
       },
       handler: function (response: any) {
+        console.log("DEBUG Payment Response:", response);
+        callRazorpayCapturePayment(
+          response.razorpay_payment_id,
+          totalAmount * 100
+        );
+        debugger;
         alert("Payment successful! Thank you for registering.");
         setShowPaymentButton(false);
-        window.location.href = "/";
+        // window.location.href = "/";
       },
       modal: {
         ondismiss: function () {
@@ -143,7 +188,6 @@ export default function RegistrationForm({
 
     try {
       const status = await regsiterParticipant(formData);
-      console.log(status, "response_response");
       setSubmitStatus("success");
 
       // Save form data before clearing for payment button prefill
@@ -356,7 +400,6 @@ export default function RegistrationForm({
             id="marathonCategory"
             value={formData.marathonCategory}
             onChange={(e) => {
-              debugger;
               const selected = eventCategory.find(
                 (cat) => cat.title === e.target.value
               );
