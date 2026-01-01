@@ -59,7 +59,8 @@ export default function Home() {
               </div>
 
               {/* Event Date Banner */}
-              <div className="mt-8 md:mt-12">
+              <div className="mt-8 md:mt-12 space-y-4">
+                {/* Main Familython Event */}
                 <div className="inline-block bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 rounded-2xl p-1 shadow-2xl animate-pulse">
                   <div className="bg-black/80 backdrop-blur-sm rounded-xl px-6 py-4 md:px-8 md:py-5">
                     <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
@@ -97,6 +98,44 @@ export default function Home() {
                           Early Bird tickets are limited- Only the first 50
                           registrations will get 50% discount!
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Adventure Kid Event - Feb 1 */}
+                <div className="inline-block bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 rounded-2xl p-1 shadow-2xl">
+                  <div className="bg-black/80 backdrop-blur-sm rounded-xl px-6 py-4 md:px-8 md:py-5">
+                    <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
+                      {/* Icon */}
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                          <svg
+                            className="w-6 h-6 md:w-7 md:h-7 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      {/* Text Content */}
+                      <div className="text-center md:text-left">
+                        <p className="text-white text-xs md:text-sm font-semibold mb-1 tracking-wide">
+                          🚀 Adventure Kids Club - Special Event
+                        </p>
+                        <div className="flex items-center gap-2 justify-center md:justify-start">
+                          <span className="text-green-400 text-base md:text-lg font-black uppercase">
+                            Join Us:
+                          </span>
+                          <span className="text-white text-lg md:text-xl font-black">
+                            1st February, 2026
+                          </span>
+                        </div>
+                        <p className="text-gray-300 text-xs md:text-sm mt-2">
+                          Fun-filled adventure activities for kids & families!
+                        </p>
                       </div>
                     </div>
                   </div>

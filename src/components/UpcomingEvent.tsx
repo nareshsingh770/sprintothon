@@ -1,4 +1,8 @@
 "use client";
+import { useFirebase } from "@/lib/FirebaseContext";
+import { initiateRazorpayPayment } from "@/lib/razorpayUtils";
+import { addOnSheet } from "@/services/apiServices";
+import { getFunctions } from "firebase/functions";
 import { useState, useEffect } from "react";
 import { z } from "zod";
 
@@ -36,7 +40,6 @@ type FormErrors = {
 
 interface UpcomingEventProps {
   onPriceChange?: (price: number, form: any) => void;
-  setFocus?: (focus: boolean) => void;
   submitted?: boolean;
   setSubmitted?: (submitted: boolean) => void;
 }
@@ -53,12 +56,14 @@ const defaultForm: FormData = {
 
 const UpcomingEvent = ({
   onPriceChange,
-  setFocus,
   submitted,
   setSubmitted,
 }: UpcomingEventProps) => {
+  const UUID = crypto.randomUUID();
   const [form, setForm] = useState<FormData>(defaultForm);
   const [errors, setErrors] = useState<FormErrors>({});
+  const app = useFirebase();
+  const functions = getFunctions(app);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -101,7 +106,7 @@ const UpcomingEvent = ({
     }
   }, [form.adults, form.kids]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (setSubmitted) setSubmitted(false);
     if (calculatePrice() === 0) {
@@ -115,8 +120,41 @@ const UpcomingEvent = ({
     try {
       eventFormSchema.parse(form);
       setErrors({});
+      const registrationData = {
+        ...form,
+        type: "adventure",
+        price: calculatePrice(),
+        userId: UUID,
+        payment_id: "pending",
+      };
+
+      await addOnSheet(registrationData);
       if (setSubmitted) setSubmitted(true);
-      if (setFocus) setFocus(true);
+      initiateRazorpayPayment({
+        amount: calculatePrice(),
+        platformFee: 10,
+        paymentTitle: "Adventure Club Sprintothon 2024",
+        eventTitle: "Adventure Club Sprintothon 2024 Registration",
+        functions,
+        onSuccess: async (payment_id: string) => {
+          try {
+            const status = await addOnSheet({
+              action: "update",
+              type: "adventure",
+              payment_id,
+              userId: UUID,
+            });
+            console.log("Update response:", status);
+            alert("Payment Successful! Thank you for registering.");
+            setErrors({});
+          } catch (error) {
+            console.error("Error updating payment ID:", error);
+            alert(
+              "Payment recorded but there was an issue updating the record. Please contact support."
+            );
+          }
+        },
+      });
     } catch (err) {
       if (err instanceof z.ZodError) {
         const fieldErrors: FormErrors = {};
@@ -252,21 +290,8 @@ const UpcomingEvent = ({
                 Ticket Price:{" "}
                 <span className="text-blue-600">₹{calculatePrice()}</span>
               </p>
-              <p className="text-lg font-medium">
-                Platform Fee: <span className="text-blue-600">₹10</span>
-              </p>
-              <p className="text-lg font-semibold">
-                Total:{" "}
-                <span className="text-blue-600">₹{calculatePrice() + 10}</span>
-              </p>
             </div>
           )}
-
-          {/* <div className="md:col-span-2">
-            <label className="block mb-1">Transaction ID/UTR/Payment ID</label>
-            <input name="transactionId" value={form.transactionId} onChange={handleChange} className="w-full border rounded px-3 py-2" />
-            {errors.transactionId && <p className="text-red-600 text-sm">{errors.transactionId}</p>}
-          </div> */}
 
           <div className="md:col-span-2 flex items-center">
             <input
@@ -276,7 +301,27 @@ const UpcomingEvent = ({
               onChange={handleChange}
               className="mr-2"
             />
-            <label>I agree to the terms &amp; conditions</label>
+            <label htmlFor="acknowledgment" className="text-sm select-none">
+              I have read and agree to the
+              <a
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-pink-600 underline mx-1"
+              >
+                Privacy Policy
+              </a>
+              and
+              <a
+                href="/cancellation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-pink-600 underline mx-1"
+              >
+                Cancellation Policy
+              </a>
+              .
+            </label>
           </div>
           {errors.agree && (
             <p className="md:col-span-2 text-red-600 text-sm">{errors.agree}</p>
@@ -285,9 +330,9 @@ const UpcomingEvent = ({
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="bg-pink-600 text-white px-6 py-2 rounded hover:bg-pink-700"
+              className="bg-pink-600 text-white px-6 py-2 rounded w-full hover:bg-pink-700"
             >
-              Done
+              Buy Ticket Now
             </button>
           </div>
         </div>

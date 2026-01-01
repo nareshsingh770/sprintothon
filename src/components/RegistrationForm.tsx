@@ -4,47 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { registrationFormSchema, type RegistrationFormData } from "../types";
 import { Send } from "lucide-react";
 import { z } from "zod";
-import { regsiterParticipant } from "@/services/apiServices";
+import { addOnSheet } from "@/services/apiServices";
 import { eventCategory } from "@/lib/appConstant";
 
-import {
-  getFunctions,
-  httpsCallable,
-  connectFunctionsEmulator,
-} from "firebase/functions";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import { useFirebase } from "@/lib/FirebaseContext";
-
-const app = useFirebase();
-const functions = getFunctions(app);
-
-// Connect to the local Functions emulator in development.
-// Enable by setting NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true or running on localhost.
-if (typeof window !== "undefined") {
-  const useEmulator =
-    process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATOR === "true" ||
-    window.location.hostname === "localhost";
-  if (useEmulator) {
-    const port = Number(process.env.NEXT_PUBLIC_FIREBASE_EMULATOR_PORT || 5001);
-    try {
-      connectFunctionsEmulator(functions, "localhost", port);
-      console.log(`Connected Functions emulator on localhost:${port}`);
-    } catch (e) {
-      console.warn("Could not connect to Functions emulator:", e);
-    }
-  }
-}
-
-const callRazorpayCapturePayment = async (
-  payment_id: string,
-  amount: number
-) => {
-  const capturePayment = httpsCallable(functions, "capturePaymentHttp");
-  const res = await capturePayment({
-    payment_id: payment_id,
-    amount: amount,
-  });
-  console.log(res.data, "DEBUG Firebase cloud function response");
-};
+import { initiateRazorpayPayment } from "@/lib/razorpayUtils";
 
 export default function RegistrationForm({
   selectedEvent,
@@ -53,6 +18,27 @@ export default function RegistrationForm({
   selectedEvent: any;
   eventonChange: (event: any) => void;
 }) {
+  const app = useFirebase();
+  const functions = getFunctions(app);
+  const UUID = crypto.randomUUID();
+  // Connect to the local Functions emulator in development.
+  // Enable by setting NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true or running on localhost.
+  if (typeof window !== "undefined") {
+    const useEmulator =
+      process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATOR === "true" ||
+      window.location.hostname === "localhost";
+    if (useEmulator) {
+      const port = Number(
+        process.env.NEXT_PUBLIC_FIREBASE_EMULATOR_PORT || 5001
+      );
+      try {
+        connectFunctionsEmulator(functions, "localhost", port);
+        console.log(`Connected Functions emulator on localhost:${port}`);
+      } catch (e) {
+        console.warn("Could not connect to Functions emulator:", e);
+      }
+    }
+  }
   const [formData, setFormData] = useState<RegistrationFormData>({
     firstname: "",
     lastname: "",
@@ -76,6 +62,7 @@ export default function RegistrationForm({
     pincode: "",
     message: "",
     acknowledgment: false,
+    type: "registration",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -110,57 +97,28 @@ export default function RegistrationForm({
   const handlePayment = () => {
     if (!selectedEvent) return;
 
-    const totalAmount =
-      selectedEvent?.price + Math.round(selectedEvent?.price * 0.18) + 21 || 0;
-
-    const options = {
-      key: "rzp_live_Rjr6kDsmmEBbfb",
-      amount: totalAmount * 100, // Amount in paise
-      currency: "INR",
-      name: "Marathon Registration",
-      description: `${selectedEvent.title} Marathon Registration`,
-      image: "/logo.png", // Your logo
-      config: {
-        display: {
-          preferences: {
-            show_default_blocks: false,
-          },
-          blocks: {
-            upi: {
-              name: "Pay using UPI",
-              instruments: [
-                {
-                  method: "upi",
-                },
-              ],
-            },
-          },
-          sequence: ["block.upi"],
-        },
+    initiateRazorpayPayment({
+      amount: selectedEvent.price,
+      platformFee: 21,
+      paymentTitle: "Sprintothon 2024",
+      eventTitle: selectedEvent.title,
+      functions,
+      onSuccess: async (payment_id: string) => {
+        try {
+          const status = await addOnSheet({
+            action: "update",
+            type: "registration",
+            payment_id,
+            userId: UUID,
+          });
+          console.log("Update response:", status);
+          alert("Payment successful! Thank you for registering.");
+          setErrors({});
+        } catch (error) {
+          setSubmitStatus("error");
+        }
       },
-      theme: {
-        color: "#db2777", // Pink color
-      },
-      handler: function (response: any) {
-        console.log("DEBUG Payment Response:", response);
-        callRazorpayCapturePayment(
-          response.razorpay_payment_id,
-          totalAmount * 100
-        );
-        debugger;
-        alert("Payment successful! Thank you for registering.");
-        setShowPaymentButton(false);
-        // window.location.href = "/";
-      },
-      modal: {
-        ondismiss: function () {
-          console.log("Payment cancelled");
-        },
-      },
-    };
-
-    const razorpay = new (window as any).Razorpay(options);
-    razorpay.open();
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -187,7 +145,13 @@ export default function RegistrationForm({
     setIsSubmitting(true);
 
     try {
-      const status = await regsiterParticipant(formData);
+      const status = await addOnSheet({
+        ...formData,
+        type: "registration",
+        price: selectedEvent.price,
+        payment_id: "pending",
+        userId: UUID,
+      });
       setSubmitStatus("success");
 
       // Save form data before clearing for payment button prefill
@@ -219,13 +183,13 @@ export default function RegistrationForm({
         pincode: "",
         message: "",
         acknowledgment: false,
+        type: "registration",
       });
       setErrors({});
     } catch (error) {
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
-      console.log("initiating payment");
       handlePayment();
     }
   };

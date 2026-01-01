@@ -53,6 +53,7 @@ export const registrationFormSchema = z.object({
   acknowledgment: z.boolean().refine((val) => val === true, {
     message: "You must acknowledge the terms and conditions",
   }),
+  type: z.string(),
 });
 
 export type RegistrationFormData = z.infer<typeof registrationFormSchema>;

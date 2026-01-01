@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
 import { z } from "zod";
+import { addOnSheet } from "@/services/apiServices";
 
 const sponsorSchema = z.object({
   iam: z.enum(["Brand", "Influencer", "YouTuber"]),
@@ -60,15 +61,11 @@ export default function SponsorsPage() {
 
     setIsSubmitting(true);
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbzVeY79BQ3mG9kAAubaFsQhj-XT-UwCy5f4qybyMgH4Zr1mtEX6xuj15QNs7BJw2GZZ/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type: "sponsor", ...form }),
-        }
-      );
+      const status = await addOnSheet({
+        ...form,
+        type: "sponsor",
+        userId: crypto.randomUUID(),
+      });
       setStatus("success");
       setForm({
         iam: "Brand",
