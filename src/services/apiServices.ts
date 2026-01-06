@@ -1,6 +1,6 @@
 export const addOnSheet = async (data: any) => {
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbwAPkVwXPJ9uV1c7PtfxL87D7EFazIwaw_EJCLxz3KeQ693ezzMPsbYf6KpKekxPu5r/exec",
+    "https://script.google.com/macros/s/AKfycbyO-S0Hm3Ob_pCK-LhHVgXoNI4R4jeJZQKzDWRQWY6Nz8p3qncbnKJsWUGXUnleqPhJ/exec",
     {
       method: "POST",
       mode: "no-cors",

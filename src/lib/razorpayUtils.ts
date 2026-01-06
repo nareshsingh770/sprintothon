@@ -11,7 +11,6 @@ export const callRazorpayCapturePayment = async (
     payment_id: payment_id,
     amount: amount,
   });
-  console.log(res.data, "DEBUG Firebase cloud function response");
 };
 
 export interface PaymentOptions {

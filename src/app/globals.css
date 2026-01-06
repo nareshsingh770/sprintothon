@@ -152,3 +152,39 @@ span.wrapper-animation:before {
 }
 .blink { animation: blink 1s step-end infinite; }
 
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes circle {
+  0% {
+    stroke-dasharray: 0 157;
+    transform: rotate(0deg);
+  }
+  100% {
+    stroke-dasharray: 157 157;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes check {
+  0% {
+    stroke-dasharray: 0 50;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 50 50;
+    stroke-dashoffset: 0;
+  }
+}
+

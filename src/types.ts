@@ -57,30 +57,3 @@ export const registrationFormSchema = z.object({
 });
 
 export type RegistrationFormData = z.infer<typeof registrationFormSchema>;
-
-export interface Blog {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  author: string;
-  image?: string;
-}
-
-export interface PortfolioItem {
-  id: string;
-  title: string;
-  screenshot: string;
-  description: string;
-  technologies: string[];
-  liveUrl?: string;
-}
-
-export interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  image: string;
-  bio: string;
-}

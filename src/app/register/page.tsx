@@ -6,7 +6,6 @@ import RegistrationForm from "@/components/RegistrationForm";
 import { eventCategory } from "@/lib/appConstant";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { addOnSheet } from "@/services/apiServices";
 import PaymentSummary from "@/components/PaymentSummary";
 
 function RegistrationContent() {
@@ -23,7 +22,6 @@ function RegistrationContent() {
       ? eventCategory.find((e) => {
           const a = e.title.toLowerCase();
           const b = eventType.toLowerCase();
-          console.log(a, b, "comparing");
           return e.title.toLowerCase() === eventType.toLowerCase();
         })
       : null;
@@ -33,7 +31,6 @@ function RegistrationContent() {
     setSelectedEvent(selected);
   }, [selectedEvent, searchParams]);
   const getPriceDetails = (priceDetails: any, form: any) => {
-    console.log(form, "form from child");
     setPriceDetails(priceDetails);
     setFormData(form);
   };

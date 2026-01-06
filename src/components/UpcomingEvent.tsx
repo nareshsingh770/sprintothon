@@ -62,6 +62,8 @@ const UpcomingEvent = ({
   const UUID = crypto.randomUUID();
   const [form, setForm] = useState<FormData>(defaultForm);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const app = useFirebase();
   const functions = getFunctions(app);
 
@@ -88,14 +90,14 @@ const UpcomingEvent = ({
   const calculatePrice = () => {
     const { adults, kids } = form;
 
-    if (adults === 1 && kids === 0) return 129;
-    if (adults === 2 && kids === 0) return 129 * 2;
-    if (adults === 1 && kids === 1) return 199;
-    if (adults === 1 && kids === 2) return 399;
-    if (adults === 2 && kids === 2) return 399;
-    if (adults === 2 && kids === 3) return 599;
-    if (adults === 1 && kids === 3) return 599;
-    if (adults === 2 && kids === 1) return 249;
+    if (adults === 1 && kids === 0) return 249;
+    if (adults === 2 && kids === 0) return 249 * 2;
+    if (adults === 1 && kids === 1) return 399;
+    if (adults === 1 && kids === 2) return 799;
+    if (adults === 2 && kids === 2) return 799;
+    if (adults === 2 && kids === 3) return 1199;
+    if (adults === 1 && kids === 3) return 1199;
+    if (adults === 2 && kids === 1) return 499;
     return 0;
   };
 
@@ -108,6 +110,7 @@ const UpcomingEvent = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     if (setSubmitted) setSubmitted(false);
     if (calculatePrice() === 0) {
       setErrors((prev) => ({
@@ -115,6 +118,7 @@ const UpcomingEvent = ({
         adults: "Please select at least one adult and one kid",
         kids: "Please select at least one adult and one kid",
       }));
+      setIsLoading(false);
       return;
     }
     try {
@@ -138,17 +142,18 @@ const UpcomingEvent = ({
         functions,
         onSuccess: async (payment_id: string) => {
           try {
+            setShowSuccessModal(true);
+            setIsLoading(false);
             const status = await addOnSheet({
               action: "update",
               type: "adventure",
               payment_id,
               userId: UUID,
             });
-            console.log("Update response:", status);
-            alert("Payment Successful! Thank you for registering.");
             setErrors({});
           } catch (error) {
             console.error("Error updating payment ID:", error);
+            setIsLoading(false);
             alert(
               "Payment recorded but there was an issue updating the record. Please contact support."
             );
@@ -164,11 +169,118 @@ const UpcomingEvent = ({
         });
         setErrors(fieldErrors);
       }
+      setIsLoading(false);
     }
   };
 
   return (
     <div>
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="relative">
+                <svg
+                  className="animate-[checkmark_0.6s_ease-in-out]"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                  width="80"
+                  height="80"
+                >
+                  <circle
+                    className="animate-[circle_0.6s_ease-in-out]"
+                    cx="26"
+                    cy="26"
+                    r="25"
+                    fill="none"
+                    stroke="#10b981"
+                    strokeWidth="2"
+                  />
+                  <path
+                    className="animate-[check_0.6s_ease-in-out_0.3s_both]"
+                    fill="none"
+                    stroke="#10b981"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    d="M14 27l7 7 16-16"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Payment Successful!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Dear Parent Thank You For Registering Your Family. We are eager to
+              host you at the venue.
+            </p>
+            <p className="text-gray-600 mb-6 bg-amber-100 px-4 py-2 rounded text-[0.875rem]">
+              If you refer 5 Kids you will get 50% Flat Discount on your kid's
+              entry. If you have any queries please email us at{" "}
+              <b>contact@sprintothon.com</b>
+            </p>
+            <button
+              onClick={() => {
+                setShowSuccessModal(false);
+                setForm(defaultForm);
+              }}
+              className="bg-pink-600 text-white px-6 py-2 rounded hover:bg-pink-700 transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-pink-50 rounded-lg p-4 shadow-sm flex flex-col h-full">
+            <h2 className="text-2xl font-bold text-pink-700 mb-2">
+              In just Rs.399 Kids will get
+            </h2>
+            <ul className="list-disc pl-6 text-gray-800 space-y-1 flex-1">
+              <li>Zip-Line</li>
+              <li>Zorb Roller</li>
+              <li>Tarzan Swing</li>
+              <li>Archery</li>
+              <li>Mickey Mouse Bouncy</li>
+              <li>Trampoline</li>
+              <li>Burma Bridge</li>
+              <li>Commando Net</li>
+              <li>Air Ball</li>
+              <li>Dart Game</li>
+              <li>Wall climbing and much more</li>
+            </ul>
+          </div>
+          <div className="bg-blue-50 rounded-lg p-4 shadow-sm flex flex-col h-full">
+            <h3 className="text-xl font-semibold text-blue-700 mb-2">
+              Activities for Parents
+            </h3>
+            <ul className="list-disc pl-6 text-gray-800 space-y-1 flex-1">
+              <li>Box Cricket</li>
+              <li>Hit The Basket</li>
+              <li>Tug of War</li>
+            </ul>
+          </div>
+          <div className="bg-green-50 rounded-lg p-4 shadow-sm flex flex-col h-full">
+            <h3 className="text-xl font-semibold text-green-700 mb-2">
+              Activities For Couples
+            </h3>
+            <ul className="list-disc pl-6 text-gray-800 space-y-1 flex-1">
+              <li>Paper Dance</li>
+              <li>Musical Chair</li>
+              <li>Hit The Basket</li>
+              <li>Tug of War</li>
+            </ul>
+          </div>
+        </div>
+        {/* Info and disclaimer section */}
+        <div className="mt-8 space-y-4">
+          <div className="bg-amber-100 border-l-4 border-amber-400 p-4 rounded text-amber-800 font-medium">
+            If you refer 5 kids your kid will get{" "}
+            <span className="font-bold">50% discount</span>
+          </div>
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -225,7 +337,7 @@ const UpcomingEvent = ({
               <button
                 type="button"
                 onClick={() => handleNumberChange("adults", -1)}
-                className="w-10 h-10 border rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
+                className="w-10 h-10 border rounded bg-[rgb(var(--secondary))] hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
               >
                 -
               </button>
@@ -239,7 +351,7 @@ const UpcomingEvent = ({
               <button
                 type="button"
                 onClick={() => handleNumberChange("adults", 1)}
-                className="w-10 h-10 border rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
+                className="w-10 h-10 border rounded bg-[rgb(var(--secondary))] hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
               >
                 +
               </button>
@@ -255,7 +367,7 @@ const UpcomingEvent = ({
               <button
                 type="button"
                 onClick={() => handleNumberChange("kids", -1)}
-                className="w-10 h-10 border rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
+                className="w-10 h-10 border rounded bg-[rgb(var(--secondary))] hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
               >
                 -
               </button>
@@ -269,7 +381,7 @@ const UpcomingEvent = ({
               <button
                 type="button"
                 onClick={() => handleNumberChange("kids", 1)}
-                className="w-10 h-10 border rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
+                className="w-10 h-10 border rounded bg-[rgb(var(--secondary))] hover:bg-gray-200 flex items-center justify-center text-xl font-bold"
               >
                 +
               </button>
@@ -285,7 +397,7 @@ const UpcomingEvent = ({
           )}
 
           {calculatePrice() > 0 && (
-            <div className="md:col-span-2 bg-blue-50 border border-blue-200 rounded p-4">
+            <div className="md:col-span-2 bg-[rgb(var(--secondary))] border border-blue-200 rounded p-4">
               <p className="text-lg font-medium">
                 Ticket Price:{" "}
                 <span className="text-blue-600">₹{calculatePrice()}</span>
@@ -330,13 +442,51 @@ const UpcomingEvent = ({
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="bg-pink-600 text-white px-6 py-2 rounded w-full hover:bg-pink-700"
+              disabled={isLoading}
+              className="bg-pink-600 text-white px-6 py-2 rounded w-full hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Buy Ticket Now
+              {isLoading && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              )}
+              {isLoading ? "Processing..." : "Buy Ticket Now"}
             </button>
           </div>
         </div>
       </form>
+
+      <div className="mt-4 flex flex-col gap-4 max-w-4xl">
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded text-blue-800">
+          <span className="font-semibold">Please Note :</span>
+          <br />
+          Our charges have been revised due to a flood of registrations. These
+          charges are subject to change anytime.
+        </div>
+        <div className="bg-gray-100 border-l-4 border-gray-400 p-4 rounded text-gray-700">
+          <span className="font-semibold">Disclaimer:</span>
+          <br />
+          Few activities could be chargeable and subject to change as per the
+          availability.
+        </div>
+      </div>
     </div>
   );
 };
