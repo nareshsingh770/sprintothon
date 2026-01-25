@@ -80,7 +80,7 @@ const UpcomingEvent = ({
     setForm((prev) => {
       const newValue = Math.max(
         0,
-        Math.min(name === "adults" ? 2 : 3, prev[name] + delta)
+        Math.min(name === "adults" ? 2 : 3, prev[name] + delta),
       );
       return { ...prev, [name]: newValue };
     });
@@ -90,14 +90,14 @@ const UpcomingEvent = ({
   const calculatePrice = () => {
     const { adults, kids } = form;
 
-    if (adults === 1 && kids === 0) return 249;
-    if (adults === 2 && kids === 0) return 249 * 2;
+    if (adults === 1 && kids === 0) return 299;
+    if (adults === 2 && kids === 0) return 299 * 2;
     if (adults === 1 && kids === 1) return 399;
     if (adults === 1 && kids === 2) return 799;
     if (adults === 2 && kids === 2) return 799;
     if (adults === 2 && kids === 3) return 1199;
     if (adults === 1 && kids === 3) return 1199;
-    if (adults === 2 && kids === 1) return 499;
+    if (adults === 2 && kids === 1) return 599;
     return 0;
   };
 
@@ -155,7 +155,7 @@ const UpcomingEvent = ({
             console.error("Error updating payment ID:", error);
             setIsLoading(false);
             alert(
-              "Payment recorded but there was an issue updating the record. Please contact support."
+              "Payment recorded but there was an issue updating the record. Please contact support.",
             );
           }
         },
