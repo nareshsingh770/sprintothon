@@ -20,7 +20,9 @@ export default function RegistrationForm({
 }) {
   const app = useFirebase();
   const functions = getFunctions(app);
-  const UUID = crypto.randomUUID();
+  const uuidRef = useRef(crypto.randomUUID());
+  const UUID = uuidRef.current;
+
   // Connect to the local Functions emulator in development.
   // Enable by setting NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true or running on localhost.
   if (typeof window !== "undefined") {
@@ -62,6 +64,7 @@ export default function RegistrationForm({
     pincode: "",
     message: "",
     acknowledgment: false,
+    referenceCode: "",
     type: "registration",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -102,6 +105,8 @@ export default function RegistrationForm({
       platformFee: 21,
       paymentTitle: "Sprintothon 2024",
       eventTitle: selectedEvent.title,
+      userEmail: emailRef.current,
+      userName: nameRef.current,
       functions,
       onSuccess: async (payment_id: string) => {
         try {
@@ -119,12 +124,43 @@ export default function RegistrationForm({
         }
       },
     });
+    
+      setFormData({
+        firstname: "",
+        lastname: "",
+        gender: "" as "male" | "female" | "Transgender" | "Prefer Not to Say",
+        tShirtSize: "" as
+          | "XS"
+          | "S"
+          | "M"
+          | "L"
+          | "XL"
+          | "XXL"
+          | "XXXL"
+          | "4XL"
+          | "5XL",
+        marathonCategory: "",
+        mobile: "",
+        email: "",
+        age: "",
+        country: "india",
+        address: "",
+        pincode: "",
+        message: "",
+        acknowledgment: false,
+        referenceCode: "",
+        type: "registration",
+      });
   };
+const emailRef = useRef("");
+const nameRef = useRef("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus("idle");
     setErrors({});
+emailRef.current = formData.email;
+nameRef.current = `${formData.firstname} ${formData.lastname}`;
 
     // Validate with Zod
     try {
@@ -160,31 +196,6 @@ export default function RegistrationForm({
       // Show payment button after successful registration
       setShowPaymentButton(true);
 
-      setFormData({
-        firstname: "",
-        lastname: "",
-        gender: "" as "male" | "female" | "Transgender" | "Prefer Not to Say",
-        tShirtSize: "" as
-          | "XS"
-          | "S"
-          | "M"
-          | "L"
-          | "XL"
-          | "XXL"
-          | "XXXL"
-          | "4XL"
-          | "5XL",
-        marathonCategory: "",
-        mobile: "",
-        email: "",
-        age: "",
-        country: "india",
-        address: "",
-        pincode: "",
-        message: "",
-        acknowledgment: false,
-        type: "registration",
-      });
       setErrors({});
     } catch (error) {
       setSubmitStatus("error");
@@ -491,7 +502,29 @@ export default function RegistrationForm({
           </p>
         )}
       </div>
-
+      <div className="mb-3">
+        <label htmlFor="referenceCode" className="block text-sm font-medium mb-2">
+          Reference Code (Optional)
+        </label>
+        <input
+          id="referenceCode"
+          type="text"
+          placeholder="Enter reference code"
+          value={formData.referenceCode}
+          onChange={(e) => {
+            setFormData({ ...formData, referenceCode: e.target.value });
+            if (errors.referenceCode) setErrors({ ...errors, referenceCode: "" });
+          }}
+          className={`w-full px-4 py-3 rounded-lg border bg-[rgb(var(--background))] focus:ring-2 focus:ring-primary outline-none transition ${
+            errors.referenceCode ? "border-red-500" : ""
+          }`}
+        />
+        {errors.referenceCode && (
+          <p className="text-red-600 dark:text-red-400 text-sm mt-1">
+            {errors.referenceCode}
+          </p>
+        )}
+      </div>
       <div className="mb-3">
         <label htmlFor="message" className="block text-sm font-medium mb-2">
           Additional Notes (Optional)

@@ -3,9 +3,11 @@ import React from "react";
 const PaymentSummary = ({
   price,
   platformFee,
+  gstInclude
 }: {
   price: number;
   platformFee: number;
+  gstInclude: boolean;
 }) => {
   return (
     <>
@@ -15,10 +17,12 @@ const PaymentSummary = ({
           <span className="text-muted-foreground">Ticket Price</span>
           <span className="font-medium">₹{price}</span>
         </div>
-        <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">GST (18%)</span>
-          <span className="font-medium">+₹{(price || 0) * 0.18}</span>
-        </div>
+        {gstInclude && (
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">GST (18%)</span>
+            <span className="font-medium">+₹{(price || 0) * 0.18}</span>
+          </div>
+        )}
         <div className="flex justify-between text-sm">
           <span className="text-muted-foreground">Platform Fee</span>
           <span className="font-medium">+₹{platformFee}</span>
@@ -30,7 +34,7 @@ const PaymentSummary = ({
               ₹
               {(
                 Number(price) +
-                Number(price) * 0.18 +
+                (gstInclude ? Number(price) * 0.18 : 0) +
                 Number(platformFee)
               ).toFixed(2)}
             </span>

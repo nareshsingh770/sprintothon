@@ -35,7 +35,7 @@ export const eventCategory = [
     age_group: "3 to 45 Years",
     description: `Are you ready to trade your gadgets for the great Adventure and Family Time?
 In a world of MOBILE TABLETS and OTT, give your child the gift of a real-world thrill. Visit our SPRINTOTHON adventure activities, a specially designed adventure day where parents and kids don’t just watch—they participate together as a family for countless MEMORIES & JOY`,
-    location: "Gaur City 1",
+    location: "French Appartment",
     time: "08:30 AM onwards",
     date: "SUNDAY, Feb 1, 2026",
     price: 399,

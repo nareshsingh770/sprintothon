@@ -3,7 +3,7 @@ import { useFirebase } from "@/lib/FirebaseContext";
 import { initiateRazorpayPayment } from "@/lib/razorpayUtils";
 import { addOnSheet } from "@/services/apiServices";
 import { getFunctions } from "firebase/functions";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { z } from "zod";
 
 const eventFormSchema = z.object({
@@ -59,7 +59,8 @@ const UpcomingEvent = ({
   submitted,
   setSubmitted,
 }: UpcomingEventProps) => {
-  const UUID = crypto.randomUUID();
+  const uuidRef = useRef(crypto.randomUUID());
+  const UUID = uuidRef.current;
   const [form, setForm] = useState<FormData>(defaultForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -136,10 +137,16 @@ const UpcomingEvent = ({
       if (setSubmitted) setSubmitted(true);
       initiateRazorpayPayment({
         amount: calculatePrice(),
+        gstExclude: true,
         platformFee: 10,
         paymentTitle: "Adventure Club Sprintothon 2024",
         eventTitle: "Adventure Club Sprintothon 2024 Registration",
         functions,
+        userEmail: form.email,
+        userName: form.fullName,
+        onDismiss: () => {
+          setIsLoading(false);
+        },
         onSuccess: async (payment_id: string) => {
           try {
             setShowSuccessModal(true);

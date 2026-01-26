@@ -109,11 +109,11 @@ function RegistrationContent() {
               selectedEvent.title ===
                 "Adventure Activities for Kids and Parents" ? (
                 <>
-                  <PaymentSummary price={priceDetails || 0} platformFee={10} />
+                  <PaymentSummary price={priceDetails || 0} platformFee={10} gstInclude={false} />
                 </>
               ) : (
                 <PaymentSummary
-                  price={selectedEvent?.price || 0}
+                  price={selectedEvent?.price || 0 } gstInclude={true}
                   platformFee={21}
                 />
               )}

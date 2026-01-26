@@ -53,6 +53,7 @@ export const registrationFormSchema = z.object({
   acknowledgment: z.boolean().refine((val) => val === true, {
     message: "You must acknowledge the terms and conditions",
   }),
+  referenceCode: z.string().optional(),
   type: z.string(),
 });
 
