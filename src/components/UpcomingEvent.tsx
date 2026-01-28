@@ -93,12 +93,12 @@ const UpcomingEvent = ({
 
     if (adults === 1 && kids === 0) return 299;
     if (adults === 2 && kids === 0) return 299 * 2;
-    if (adults === 1 && kids === 1) return 399;
+    if (adults === 1 && kids === 1) return 599;
+    if (adults === 2 && kids === 1) return 599;
     if (adults === 1 && kids === 2) return 799;
     if (adults === 2 && kids === 2) return 799;
     if (adults === 2 && kids === 3) return 1199;
     if (adults === 1 && kids === 3) return 1199;
-    if (adults === 2 && kids === 1) return 599;
     return 0;
   };
 

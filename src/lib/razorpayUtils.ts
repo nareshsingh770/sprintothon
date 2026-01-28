@@ -6,7 +6,7 @@ export const callRazorpayCapturePayment = async (
   amount: number,
   functions: ReturnType<typeof getFunctions>,
   userEmail?: string,
-  userName?: string
+  userName?: string,
 ) => {
   const capturePayment = httpsCallable(functions, "capturePaymentHttp");
   const res = await capturePayment({
@@ -33,7 +33,7 @@ export interface PaymentOptions {
 export const initiateRazorpayPayment = (options: PaymentOptions) => {
   const {
     amount,
-    gstExclude=false,
+    gstExclude = false,
     platformFee,
     paymentTitle,
     eventTitle,
@@ -44,11 +44,12 @@ export const initiateRazorpayPayment = (options: PaymentOptions) => {
     onDismiss,
   } = options;
 
-  const totalAmount = amount + (gstExclude ? 0 : Math.round(amount * 0.18)) + platformFee || 0;
+  const totalAmount =
+    amount + (gstExclude ? 0 : Math.round(amount * 0.18)) + platformFee || 0;
 
   const razorpayOptions = {
-    // key: "rzp_live_Rjr6kDsmmEBbfb",
-    key: "rzp_test_RwxFwEZYglQ518",
+    key: "rzp_live_Rjr6kDsmmEBbfb",
+    // key: "rzp_test_RwxFwEZYglQ518",
     amount: totalAmount * 100, // Amount in paise
     currency: "INR",
     name: paymentTitle,
@@ -81,7 +82,7 @@ export const initiateRazorpayPayment = (options: PaymentOptions) => {
         totalAmount * 100,
         functions,
         userEmail,
-        userName
+        userName,
       );
       onSuccess(response.razorpay_payment_id);
     },

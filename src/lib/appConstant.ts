@@ -41,8 +41,8 @@ In a world of MOBILE TABLETS and OTT, give your child the gift of a real-world t
     price: 399,
     priceRange: "249 - 599",
     regularPrice: 1199,
-    image: "/images/category/sitathon.jpeg",
-    alt: "kidathon 400 meter",
+    image: "",
+    alt: "kids activities",
   },
   {
     title: "Sitathon 0 KM",

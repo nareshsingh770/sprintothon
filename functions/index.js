@@ -44,10 +44,10 @@ export const api = onRequest(app);
 
 // Razorpay instance (replace with your actual key_id and key_secret)
 const razorpay = new Razorpay({
-  // key_id: 'rzp_live_Rjr6kDsmmEBbfb',
-  // key_secret: 'ZjXwH51dVpp3do9iA0r0UFtj',
-  key_id: 'rzp_test_RwxFwEZYglQ518',
-  key_secret: 'jD5g3NiQvqvzQ4d6RbRhUilW',
+  key_id: 'rzp_live_Rjr6kDsmmEBbfb',
+  key_secret: 'ZjXwH51dVpp3do9iA0r0UFtj',
+  // key_id: 'rzp_test_RwxFwEZYglQ518',
+  // key_secret: 'jD5g3NiQvqvzQ4d6RbRhUilW',
 });
 
 // Handler for capturePaymentHttp
