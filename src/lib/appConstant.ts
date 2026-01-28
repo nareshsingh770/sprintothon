@@ -38,8 +38,8 @@ In a world of MOBILE TABLETS and OTT, give your child the gift of a real-world t
     location: "French Appartment",
     time: "08:30 AM onwards",
     date: "SUNDAY, Feb 1, 2026",
-    price: 399,
-    priceRange: "249 - 599",
+    price: 599,
+    priceRange: "299 - 599",
     regularPrice: 1199,
     image: "/images/category/sitathon.jpeg",
     alt: "kidathon 400 meter",
@@ -59,7 +59,7 @@ In a world of MOBILE TABLETS and OTT, give your child the gift of a real-world t
   },
   {
     title: "Kidathon 400 Meter",
-    age_group: "4 to 12 Years",
+    age_group: "4 to 7 Years",
     description:
       "With distances ranging from 400 meters to 1 KM, it’s the perfect introduction to fitness. It’s not about speed; it’s about participation, building confidence, and celebrating movement.",
     location: "Gaur City 1",
@@ -72,7 +72,7 @@ In a world of MOBILE TABLETS and OTT, give your child the gift of a real-world t
   },
   {
     title: "Kidathon 1 KM",
-    age_group: "4 to 12 Years",
+    age_group: "8 to 12 Years",
     description:
       "Inspire your child with the thrill of the finish line! The Kidathon is a safe, supervised, and incredibly fun event designed for children aged 4 to 12.",
     location: "Gaur City 1",

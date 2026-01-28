@@ -93,12 +93,12 @@ const UpcomingEvent = ({
 
     if (adults === 1 && kids === 0) return 299;
     if (adults === 2 && kids === 0) return 299 * 2;
-    if (adults === 1 && kids === 1) return 399;
+    if (adults === 1 && kids === 1) return 599;
     if (adults === 1 && kids === 2) return 799;
-    if (adults === 2 && kids === 2) return 799;
+    if (adults === 2 && kids === 2) return 1198;
     if (adults === 2 && kids === 3) return 1199;
     if (adults === 1 && kids === 3) return 1199;
-    if (adults === 2 && kids === 1) return 599;
+    if (adults === 2 && kids === 1) return 898;
     return 0;
   };
 
@@ -242,7 +242,7 @@ const UpcomingEvent = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-pink-50 rounded-lg p-4 shadow-sm flex flex-col h-full">
             <h2 className="text-2xl font-bold text-pink-700 mb-2">
-              In just Rs.399 Kids will get
+              In just Rs.599 Kids will get
             </h2>
             <ul className="list-disc pl-6 text-gray-800 space-y-1 flex-1">
               <li>Zip-Line</li>
@@ -397,6 +397,11 @@ const UpcomingEvent = ({
               <p className="text-red-600 text-sm">{errors.kids}</p>
             )}
           </div>
+          {form.kids && form.adults === 0 && (
+            <p className="md:col-span-2 text-orange-400 text-sm">
+              Please add atleast <b>One Adult</b>.
+            </p>
+          )}
           {form.kids === 2 && form.adults === 1 && (
             <p className="md:col-span-2 text-orange-400 text-sm">
               You can still add <b>ONE PARENT</b> free of cost.
